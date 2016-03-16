@@ -29,7 +29,7 @@ app.config(function ($routeProvider) {
       controller: 'AboutCtrl',
       controllerAs: 'about'
     })
-    .when('/tasks/:id', {
+    .when('/tasks', {
       templateUrl:  'views/tasks.html',
       controller:   'TasksCtrl',
     })
