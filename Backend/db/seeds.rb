@@ -8,7 +8,9 @@ def create_users
 	1.upto(10) do |i|
 		User.create({
 			email: 		Faker::Internet.email, 
-			password: Faker::Internet.password(8)
+			password: 	Faker::Internet.password(8),
+			first_name: Faker::Name.first_name,
+			last_name: 	Faker::Name.last_name
 		})
 	end
 end
@@ -22,8 +24,8 @@ def create_businesses
 				address: 	Faker::Address.street_address, 
 				city: 		Faker::Address.city, 
 				state: 		Faker::Address.state_abbr,
-				state: 		Faker::Address.country,
-				zip: 			Faker::Address.zip,
+				country: 	Faker::Address.country,
+				zip: 		Faker::Address.zip,
 				phone: 		Faker::PhoneNumber.phone_number
 			})
 	end
@@ -38,7 +40,7 @@ def create_devices
 				Device.create({
 						name: 		Faker::Company.name,   	
 						browser: 	Faker::Address.street_address, 
-						os: 			Faker::Address.city, 
+						os: 		Faker::Address.city, 
 					})		
 			end
 		end
@@ -61,7 +63,8 @@ def create_task_groups
 			provider: 		provider,
 			task_type: 		type, 
 			priority:   	priority.rand(0..3),
-			assignor_id:  users.sample.id
+			assignor_id:  	users.sample.id,
+			operator_id: 	users.sample.id
 		})	
 	end
 end
@@ -69,7 +72,7 @@ end
 def create_tasks
 	Task.destroy_all
 	devices 		= Device.all
-	businesses 	= Business.all
+	businesses 		= Business.all
 	tgroups 		= TaskGroup.all
 	users 			= User.all
 
@@ -78,7 +81,7 @@ def create_tasks
 			description: 		Faker::Company.name,   	
 			device_id: 			devices.sample.id,
 			business_id: 		businesses.sample.id, 
-			task_group_id:  tgroups.sample.id,
+			task_group_id:  	tgroups.sample.id,
 			assignee_id: 		users.sample.id   
 		})	
 	end

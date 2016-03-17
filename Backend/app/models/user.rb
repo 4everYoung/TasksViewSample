@@ -7,4 +7,10 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  before_save :set_full_name
+
+  def set_full_name
+    self.full_name = [first_name, last_name].join(' ').strip
+  end
 end
