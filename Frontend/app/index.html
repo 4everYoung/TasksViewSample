@@ -2,72 +2,79 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Management Console</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="taskViewSampleApp">
-    <!--[if lte IE 8]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
+  <body ng-app="taskViewSampleApp" style="font-family: OpenSans">
 
-    <!-- Add your site or application content here -->
-    <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">taskViewSample</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
+<div class="header" style="padding-left: 20px;background-color: #2b81af; color: white; text-align: right" href="#/">
+  <table style="width: 100%">
+    <tbody>
+    <tr>
+      <td>
+        <header style="text-align: left">
+          <h3 style="padding-bottom: 0px">Management Console</h3>
+        </header>
+      </td>
+      <td class="pull-right">
+        <div class="dropdown">
+          <button style="border-style: hidden; border-radius: 0%; background-color: lightblue;height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Welcome,<br>{{user.name}}user</span>
+            <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
         </div>
-      </div>
-    </div>
+      </td>
+      <td class="pull-right">
+        <div class="dropdown">
+          <button style="border-style: hidden; border-radius: 0%;background-color: purple; height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+            <span class="badge badge-important" style="color: white;background-color: rgb(209, 91, 71)">8</span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">8 new messages</a></li>
+          </ul>
+        </div>
+      </td>
+      <td class="pull-right" style="height: 54px">
+        <div class="dropdown">
+          <button style="border-style: hidden; border-radius: 0%;background-color: grey; height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+            <span class="badge badge-important" style="color: white;background-color: rgb(160, 160, 160)">4</span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#">4 tasks to complete</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
+</div>
+<table>
+<tbody>
+<tr>
+  <td style="width: 20%; border-right: 1px; border-color: grey">
+    <nav class="collapse navbar-collapse" id="js-navbar-collapse">
+      <ul class="nav nav-pills-nav nav-stacked">
+        <li class="active"><a href="#/"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Home</a></li>
+        <li><a ng-href="#/about"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> About</a></li>
+        <li><a ng-href="#/tasks"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Tasks</a></li>
+      </ul>
+    </nav>
+  </td>
+  <td style="width: 100%; height: 100%">
     <div class="container">
-    <div ng-view=""></div>
+      <div ng-view=""></div>
     </div>
+  </td>
+</tr>
 
-    <div class="footer">
-      <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
-      </div>
-    </div>
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
+</tbody>
+</table>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->

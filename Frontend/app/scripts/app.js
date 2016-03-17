@@ -32,6 +32,7 @@ app.config(function ($routeProvider) {
     .when('/tasks', {
       templateUrl:  'views/tasks.html',
       controller:   'TasksCtrl',
+      controllerAs: 'tasks'
     })
     .otherwise({
       redirectTo: '/'
