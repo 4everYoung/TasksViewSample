@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # devise_for :users
+  devise_for :users
 
   scope '/api' do
     resources :tasks, only: [:index, :show]
