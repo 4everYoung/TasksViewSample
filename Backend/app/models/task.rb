@@ -1,8 +1,8 @@
 class Task < ActiveRecord::Base
 
-  belongs_to :user
-  belongs_to :device
-  belongs_to :business
-  belongs_to :task_group
-  has_one :user
+  belongs_to :device, 		:inverse_of => :tasks
+  belongs_to :business,		:inverse_of => :tasks	
+  belongs_to :task_group, 	:inverse_of => :tasks
+  belongs_to :assignee, class_name: 'User', :inverse_of => :tasks
+  belongs_to :operator, class_name: 'User', :inverse_of => :tasks
 end

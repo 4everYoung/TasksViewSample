@@ -39,7 +39,7 @@ app.config(function ($routeProvider) {
     });
 });
 
-app.factory('Task', ['$resource', function($resource, $scope) {
+app.factory('Task', ['$resource', function($resource) {
   return $resource('/api/tasks/:id.json', null, {
     'update': { method:'PUT' }
   });

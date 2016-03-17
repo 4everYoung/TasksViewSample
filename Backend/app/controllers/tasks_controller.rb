@@ -1,13 +1,7 @@
 class TasksController < ApplicationController
-  # before_filter :authenticate_user!
-
+	
   def index
-  	@tasks = Business.all
-  	render json: @tasks
-  end
-
-  def show
-  	@tasks = Business.all
-  	render json: @tasks
+  	tasks = Task.all.includes(:device, :business, :task_group, :assignee)
+  	render json: tasks, root: false
   end
 end
