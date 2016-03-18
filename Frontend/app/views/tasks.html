@@ -1,4 +1,11 @@
+<!--
 <h1>Tasks</h1>
 <ul ng-repeat="task in tasks">
   <li> {{task.task_group.operator.name}} / {{task.description}} / {{task.task_group.priority}} / {{task.task_group.name}}</li>
 </ul>
+
+<div ui-grid="gridOptions"></div>
+-->
+
+<h3>Tasks table</h3>
+  <div id="grid1" style="width: 1000px;border: 1px solid rgb(212,212,212);height: 300px" ui-grid="gridOptions" class="grid"></div>

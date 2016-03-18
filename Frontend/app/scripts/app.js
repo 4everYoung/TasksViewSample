@@ -14,7 +14,8 @@ var app = angular.module('taskViewSampleApp', [
   'ngResource',
   'ngRoute',
   'ngSanitize',
-  'ngTouch'
+  'ngTouch',
+  'ui.grid'
 ])
 
 app.config(function ($routeProvider) {
@@ -31,7 +32,8 @@ app.config(function ($routeProvider) {
     })
     .when('/tasks', {
       templateUrl:  'views/tasks.html',
-      controller:   'TasksCtrl'
+      controller:   'TasksCtrl',
+      controllerAs: 'tasks'
     })
     .otherwise({
       redirectTo: '/'
