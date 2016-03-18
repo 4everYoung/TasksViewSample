@@ -15,7 +15,8 @@ var app = angular.module('taskViewSampleApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
-  'ui.grid'
+  'ui.grid',
+  'ngMaterial'
 ])
 
 app.config(function ($routeProvider) {
@@ -44,4 +45,8 @@ app.factory('Task', ['$resource', function($resource) {
   return $resource('/api/tasks/:id.json', null, {
     'update': { method:'PUT' }
   });
+}]);
+
+app.factory('TaskGroup', ['$resource', function($resource) {
+  return $resource('/api/tasks/task_types.json', null, {});
 }]);
