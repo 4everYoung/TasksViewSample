@@ -6,7 +6,7 @@
 <button ng-click=''>Confirm Task</button> |
 <button ng-click=''>Unassign Task</button> |
 <button ng-click='clearFilters()'>Clear All</button> |
-<button ng-click=''>Export to CSV</button>
+<button ng-click='csvExport()'>Export to CSV</button>
 
 <select ng-model="filters.task_type_provider" ng-change="id=filters.task_type_provider" style="height: 26px; padding-right: 5px;padding-left: 5px; text-align: right">Task Type Provider
   <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
@@ -15,5 +15,4 @@
 <md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style=" height: 26px;"></md-datepicker>
 
 <button ng-click='fetchTasks()'>Find</button>
-<button ng-click='csvExport()'>EXPORT TO CSV</button>
 <div id="grid1" style="border: 1px solid rgb(212,212,212);" ui-grid="gridOptions" class="grid"></div>
