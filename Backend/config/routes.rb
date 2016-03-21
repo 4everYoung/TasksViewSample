@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :tasks, only: [:index, :show] do
       collection do
-        get 'task_types'
+        get   'task_types'
+        post  'export'
+        get   'check_perform/:jid' => 'tasks#check_perform'
       end
     end
   end

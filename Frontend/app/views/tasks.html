@@ -15,6 +15,5 @@
 <md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style=" height: 26px;"></md-datepicker>
 
 <button ng-click='fetchTasks()'>Find</button>
-
-
-<div id="grid1" style="border: 1px solid rgb(212,212,212); min-height: 600px" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
+<button ng-click='csvExport()'>EXPORT TO CSV</button>
+<div id="grid1" style="border: 1px solid rgb(212,212,212);" ui-grid="gridOptions" class="grid"></div>

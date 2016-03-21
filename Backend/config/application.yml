@@ -1,0 +1,7 @@
+development: &default
+  reports_directory: 'reports'
+test:
+  <<: *default
+production:
+  <<: *default
+
