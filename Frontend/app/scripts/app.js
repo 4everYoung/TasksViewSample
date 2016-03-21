@@ -1,13 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc overview
- * @name taskViewSampleApp
- * @description
- * # taskViewSampleApp
- *
- * Main module of the application.\
- */
 var app = angular.module('taskViewSampleApp', [
   'ngAnimate',
   'ngCookies',
@@ -19,7 +11,7 @@ var app = angular.module('taskViewSampleApp', [
   'ngMaterial'
 ])
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',

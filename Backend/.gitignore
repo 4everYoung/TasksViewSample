@@ -5,4 +5,5 @@
 !/log/.keep
 /tmp
 /test
+/reports
 README.rdoc

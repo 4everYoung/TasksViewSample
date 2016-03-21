@@ -13,6 +13,8 @@ gem 'mysql2', '0.3.18'
 gem 'devise', '~> 3.4.0'
 gem 'faker'
 gem 'active_model_serializers', '~> 0.10.0.rc4'
+gem 'sidekiq'
+gem 'sidekiq-status'
 
 group :development, :test do
   gem 'byebug'
