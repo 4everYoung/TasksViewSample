@@ -1,18 +1,21 @@
 <h2 style="color: #2b81af">Tasks</h2>
 
-<button ng-click=''>Add Task</button> |
-<button ng-click=''>Assign Task</button> |
-<button ng-click=''>Delete Task</button> |
-<button ng-click=''>Confirm Task</button> |
-<button ng-click=''>Unassign Task</button> |
-<button ng-click='clearFilters()'>Clear All</button> |
-<button ng-click='csvExport()'>Export to CSV</button>
+<button ng-click='' style="background-color: #2b81af">Add Task</button> |
+<button ng-click='' style="background-color: #2b81af">Assign Task</button> |
+<button ng-click='' style="background-color: #2b81af">Delete Task</button> |
+<button ng-click='' style="background-color: #2b81af">Confirm Task</button> |
+<button ng-click='' style="background-color: #2b81af">Unassign Task</button> |
+<button ng-click='' style="background-color: #2b81af">Export to CSV</button>
 
-<select ng-model="filters.task_type_provider" ng-change="id=filters.task_type_provider" style="height: 26px; padding-right: 5px;padding-left: 5px; text-align: right">Task Type Provider
+<select ng-model="filters.task_type_provider" ng-change="id=filters.task_type_provider" style="height: 26px; padding-right: 5px;padding-left: 5px;">Task Type Provider
+  <option value="">Choose task type & provider</option>
   <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
 </select>
-<input  type="text" name="input" placeholder=" search by description" ng-model="filters.query">
+<input  type="text" name="input" placeholder=" search by description" ng-model="filters.query" >
 <md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style=" height: 26px;"></md-datepicker>
 
-<button ng-click='fetchTasks()'>Find</button>
-<div id="grid1" style="border: 1px solid rgb(212,212,212);" ui-grid="gridOptions" class="grid"></div>
+<button ng-click='fetchTasks()' style="background-color: #2b81af">Search</button> |
+<button ng-click='clearFilters()' style="background-color: #2b81af;">Clear All</button>
+
+
+<div id="grid1" style="border: 1px solid rgb(212,212,212); min-height: 600px" ui-grid="gridOptions" ui-grid-pagination class="grid"></div>
