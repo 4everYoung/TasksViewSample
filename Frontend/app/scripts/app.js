@@ -15,7 +15,7 @@ var app = angular.module('taskViewSampleApp', [
   'ngRoute',
   'ngSanitize',
   'ngTouch',
-  'ui.grid',
+  'ui.grid.pagination',
   'ngMaterial'
 ])
 

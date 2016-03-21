@@ -12,7 +12,7 @@ angular.module('taskViewSampleApp')
 .controller('TasksCtrl', ['$scope', '$routeParams', 'Task', 'TaskGroup', function ($scope, $routeParams, Task, TaskGroup) {
 
   $scope.fetchTasks = function() {
-    $scope.tasksData = Task.query({ filters: $scope.filters })
+    $scope.tasksData = Task.query({ filters: $scope.filters });
     $scope.gridOptions = {
       data: 'tasksData',
       enableRowHeaderSelection: false,
@@ -21,8 +21,19 @@ angular.module('taskViewSampleApp')
       columnDefs: $scope.columnDef,
       enableColumnMenus: false,
       rawData: false,
-      headerRowHeight: 32
+      paginationPageSizes: [25, 50, 75],
+      paginationPageSize: 20
     };
+  };
+
+  $scope.clearFilters = function() {
+    $scope.filters = {
+      query:      '',
+      task_type:  '',
+      provider:   '',
+      created_at: ''
+    };
+    $scope.fetchTasks();
   };
 
   $scope.joinTypeProvider = function(data) {
@@ -30,32 +41,28 @@ angular.module('taskViewSampleApp')
   };
 
   $scope.setFiltersByTypeProvider = function(data) {
-    var tmp = data.split('%')
-    $scope.filters.provider   = tmp[0]
+    var tmp = data.split('%');
+    $scope.filters.provider   = tmp[0];
     $scope.filters.task_type  = tmp[1]
   };
   $scope.columnDef = [
-    { 
-      field: 'task_group.operator.name', 
+    {
+      field: 'task_group.operator.name',
       displayName: "Operator",
-      visible: true, 
-      headerCellTemplate: $scope.headerTpl },
-    { 
+      visible: true},
+    {
       field: 'description',
       displayName: "Description",
-      visible: true,
-      headerCellTemplate:$scope.headerTpl 
+      visible: true
     },
     { field: 'task_group.priority',
       displayName: "Priority",
-      visible: true,
-      headerCellTemplate: $scope.headerTpl 
+      visible: true
     },
-    { 
+    {
       field: 'task_group.name',
       displayName: "Group Name",
-      visible: true,
-      headerCellTemplate:$scope.headerTpl
+      visible: true
     }
   ];
 
@@ -79,6 +86,6 @@ angular.module('taskViewSampleApp')
     $scope.task_types = response
   });
 
-  $scope.fetchTasks()
+  $scope.fetchTasks();
   $scope.created_at = new Date
 }]);
