@@ -1,4 +1,3 @@
-<!--
 <h1>Tasks</h1>
 <select ng-model="task_type_provider" ng-change="id=task_type_provider">
   <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
@@ -6,13 +5,4 @@
 <input  type="text" name="input" ng-model="filters.query">
 <md-datepicker ng-model="created_at" md-placeholder="Enter date" ng-change="id=created_at"></md-datepicker>
 <button ng-click='fetchTasks()'>Find</button>
-<ul ng-repeat="task in tasks">
-  <li> {{task.task_group.operator.name}} / {{task.description}} / {{task.task_group.priority}} / {{task.task_group.name}}</li>
-</ul>
-<<<<<<< HEAD
-
-<div ui-grid="gridOptions"></div>
--->
-
-<h3>Tasks table</h3>
-<div id="grid1" style="width: 1000px;border: 1px solid rgb(212,212,212);height: 300px" ui-grid="gridOptions" class="grid"></div>
+<div id="grid1" style="border: 1px solid rgb(212,212,212);" ui-grid="gridOptions" class="grid"></div>

@@ -12,7 +12,17 @@ angular.module('taskViewSampleApp')
 .controller('TasksCtrl', ['$scope', '$routeParams', 'Task', 'TaskGroup', function ($scope, $routeParams, Task, TaskGroup) {
 
   $scope.fetchTasks = function() {
-    $scope.tasks = Task.query({ filters: $scope.filters })
+    $scope.tasksData = Task.query({ filters: $scope.filters })
+    $scope.gridOptions = {
+      data: 'tasksData',
+      enableRowHeaderSelection: false,
+      multiSelect: false,
+      enableFiltering: false,
+      columnDefs: $scope.columnDef,
+      enableColumnMenus: false,
+      rawData: false,
+      headerRowHeight: 32
+    };
   };
 
   $scope.joinTypeProvider = function(data) {
@@ -24,6 +34,30 @@ angular.module('taskViewSampleApp')
     $scope.filters.provider   = tmp[0]
     $scope.filters.task_type  = tmp[1]
   };
+  $scope.columnDef = [
+    { 
+      field: 'task_group.operator.name', 
+      displayName: "Operator",
+      visible: true, 
+      headerCellTemplate: $scope.headerTpl },
+    { 
+      field: 'description',
+      displayName: "Description",
+      visible: true,
+      headerCellTemplate:$scope.headerTpl 
+    },
+    { field: 'task_group.priority',
+      displayName: "Priority",
+      visible: true,
+      headerCellTemplate: $scope.headerTpl 
+    },
+    { 
+      field: 'task_group.name',
+      displayName: "Group Name",
+      visible: true,
+      headerCellTemplate:$scope.headerTpl
+    }
+  ];
 
   $scope.filters = {
     query:      '',
@@ -37,7 +71,7 @@ angular.module('taskViewSampleApp')
   });
 
   $scope.$watch('created_at', function(value){
-    if (value) { $scope.filters.created_at = moment($scope.created_at).format('DD.MM.YYYY') }
+    $scope.filters.created_at = (value) ? moment($scope.created_at).format('DD.MM.YYYY') : ''
   });
 
   TaskGroup.query().$promise.then(function(response){
@@ -47,22 +81,4 @@ angular.module('taskViewSampleApp')
 
   $scope.fetchTasks()
   $scope.created_at = new Date
-
-  $scope.myData = Task.query();
-  $scope.columnDef = [
-    {field: 'task_group.operator.name', displayName: "Operator", visible: true, headerCellTemplate:$scope.headerTpl},
-    {field: 'description', displayName: "Description", visible: true, headerCellTemplate:$scope.headerTpl},
-    {field: 'task_group.priority', displayName: "Priority", visible: true, headerCellTemplate:$scope.headerTpl},
-    {field: 'task_group.name', displayName: "Group Name", visible: true, headerCellTemplate:$scope.headerTpl}
-  ];
-  $scope.gridOptions = {
-    data: 'myData',
-    enableRowHeaderSelection: false,
-    multiSelect: false,
-    enableFiltering: false,
-    columnDefs: $scope.columnDef,
-    enableColumnMenus: false,
-    rawData: false,
-    headerRowHeight: 32
-  };
 }]);
