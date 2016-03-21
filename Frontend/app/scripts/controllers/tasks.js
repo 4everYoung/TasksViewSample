@@ -9,21 +9,21 @@ angular.module('taskViewSampleApp')
       url: '/api/tasks/export.json',
       data: { filters: $scope.filters }
     }).success(function(response) {
-      console.log('Запущен экспорт данных в csv-файл')
+      console.log('Export to CSV started')
       $scope.exportJid = response.jid
       var checkPerform = $interval(function() {
         $http({
           method: 'get',
           url: "/api/tasks/check_perform/"+$scope.exportJid+".json",
         }).success(function(response){
-          if (response.result == 'OK') { 
-            console.log('Экспорт данных успешно завершен')
-            $interval.cancel(checkPerform) 
+          if (response.result == 'OK') {
+            console.log('Successful finish of export')
+            $interval.cancel(checkPerform)
           } else if (response.result == 'ERROR') {
-            console.log('При экспорте данных возникла ошибка')
-            $interval.cancel(checkPerform)        
+            console.log('Some problem occured in process of export')
+            $interval.cancel(checkPerform)
           }
-        });   
+        });
       }, 5000);
     });
   };
