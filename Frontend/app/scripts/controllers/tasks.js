@@ -27,6 +27,7 @@ angular.module('taskViewSampleApp')
   };
 
   $scope.clearFilters = function() {
+    $scope.created_at = new Date
     $scope.filters = {
       query:      '',
       task_type:  '',

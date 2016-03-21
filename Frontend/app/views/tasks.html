@@ -12,7 +12,7 @@
   <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
 </select>
 <input  type="text" name="input" placeholder=" search by description" ng-model="filters.query">
-<md-datepicker ng-model="filters.created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style=" height: 26px;"></md-datepicker>
+<md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style=" height: 26px;"></md-datepicker>
 
 <button ng-click='fetchTasks()'>Find</button>
 
