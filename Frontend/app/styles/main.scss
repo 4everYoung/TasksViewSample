@@ -120,6 +120,7 @@ body {
 
       .ui-grid-header-cell {
         border-right: 2px solid;
+        border-left: 1px solid;
         border-color: #ddd;
         &:hover {
           color: rgb(84, 126, 168);
@@ -147,7 +148,7 @@ body {
           .ui-grid-cell {
             background: #f9f9f9;
           }
-          .ui-grid-cell:first-child {
+          .ui-grid-cell:nth-child(2) {
             background-color: #f1f1f1;
             text-align: center;
           }
@@ -156,20 +157,21 @@ body {
           .ui-grid-cell {
             background: #fff;
           }
-          .ui-grid-cell:first-child {
+          .ui-grid-cell:nth-child(2) {
             background-color: #f9f9f9;
             text-align: center;
           }
         }
         &:hover .ui-grid-cell {
-          &:first-child {
+          &:nth-child(2) {
             background-color: #eaeaea;            
           }
           background: #f9f9f9;
         }
 
         .ui-grid-cell {
-          border-right: 2px solid;
+          border-right: 1px solid;
+          border-left: 1px solid;
           border-top: 2px solid;
           border-color: #ddd;
           height: 38px;
