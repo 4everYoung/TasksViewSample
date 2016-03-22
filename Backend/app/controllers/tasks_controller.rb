@@ -1,6 +1,4 @@
 class TasksController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:export]
-
   require 'csv'
 
   def index
@@ -16,8 +14,7 @@ class TasksController < ApplicationController
   end
 
   def export
-    @job_id = ExportTasksWorker.perform_async(params['filters'])
-    render :status => :accepted, :json => { jid: @job_id }
+    render :status => :accepted, :json => { jid: ExportTasksWorker.perform_async(params['filters']) }
   end
 
   def check_perform

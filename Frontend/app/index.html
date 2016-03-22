@@ -12,48 +12,43 @@
   </head>
   <body ng-app="taskViewSampleApp">
 
-<div class="header" href="#/">
-  <table style="width: 100%">
-    <tbody>
-    <tr>
-      <td>
-        <header style="text-align: left">
-          <h3 style="padding-bottom: 0px">Management Console</h3>
-        </header>
-      </td>
-      <td class="pull-right">
-        <div class="dropdown">
-          <button style="border-style: hidden; border-radius: 0%; background-color: lightblue;height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Welcome,<br>{{user.name}}user</span>
-            <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </td>
-      <td class="pull-right">
-        <div class="dropdown">
-          <button style="border-style: hidden; border-radius: 0%;background-color: purple; height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
-            <span class="badge badge-important" style="color: white;background-color: rgb(209, 91, 71)">8</span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">8 new messages</a></li>
-          </ul>
-        </div>
-      </td>
-      <td class="pull-right" style="height: 54px">
-        <div class="dropdown">
-          <button style="border-style: hidden; border-radius: 0%;background-color: grey; height: 54px" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
-            <span class="badge badge-important" style="color: white;background-color: rgb(160, 160, 160)">4</span></button>
-          <ul class="dropdown-menu">
-            <li><a href="#">4 tasks to complete</a></li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
 
-</div>
+<nav class="navbar navbar-default main-header" href="#/">
+ <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand main-header-brand" href="javascript:void(0)">Management Console</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right main-navbar-menu-right">
+        <li class="dropdown navbar-btn-tasks">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-tasks" aria-hidden="true"></span><span class="badge badge-important">4</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="javascript:void(0)">4 tasks to complete</a></li>
+          </ul>
+        </li>
+        <li class="dropdown navbar-btn-messages">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge badge-important">8</span></a>
+          <ul class="dropdown-menu">
+            <li><a href="javascript:void(0)">8 new messages</a></li>
+          </ul>
+        </li>
+        <li class="dropdown navbar-btn-user">
+          <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="javascript:void(0)">Profile</a></li>
+            <li><a href="javascript:void(0)">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div> 
+  </div> 
+</nav>
 <table>
 <tbody>
 <tr>
