@@ -8,25 +8,29 @@ var app = angular.module('taskViewSampleApp', [
   'ngSanitize',
   'ngTouch',
   'ui.grid.pagination',
-  'ngMaterial'
-])
+  'ngMaterial',
+  'ng-breadcrumbs'
+]);
 
 app.config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl',
-      controllerAs: 'main'
+      controllerAs: 'main',
+      label: 'Home page'
     })
     .when('/about', {
       templateUrl: 'views/about.html',
       controller: 'AboutCtrl',
-      controllerAs: 'about'
+      controllerAs: 'about',
+      label: 'About'
     })
     .when('/tasks', {
       templateUrl:  'views/tasks.html',
       controller:   'TasksCtrl',
-      controllerAs: 'tasks'
+      controllerAs: 'tasks',
+      label: 'Tasks'
     })
     .otherwise({
       redirectTo: '/'

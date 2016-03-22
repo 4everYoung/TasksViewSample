@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('taskViewSampleApp')
-.controller('TasksCtrl', ['$scope', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, $routeParams, $http, $interval, Task, TaskGroup) {
-
+.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, breadcrumbs, $routeParams, $http, $interval, Task, TaskGroup) {
+  $scope.breadcrumbs = breadcrumbs;
+  $scope.breadcrumbs.generateBreadcrumbs();
   $scope.csvExport = function() {
     $http({
       method: 'post',

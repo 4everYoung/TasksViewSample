@@ -8,10 +8,7 @@
  * Controller of the taskViewSampleApp
  */
 angular.module('taskViewSampleApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('AboutCtrl', ['$scope', 'breadcrumbs', function ($scope, breadcrumbs) {
+    $scope.breadcrumbs = breadcrumbs;
+    $scope.breadcrumbs.generateBreadcrumbs();
+  }]);
