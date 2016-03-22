@@ -20,22 +20,88 @@ body {
   padding: 0;
 }
 
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
+.main-header {
+  background-color: #438eb9;
+  min-height: initial;
+  border-radius: 0;
+  .navbar-toggle {
+    border-color: white;
+    .icon-bar {
+      background-color: white;
+    }
+    &:hover, &:focus {
+      border-color: #333;
+      background-color: white;
+      .icon-bar {
+        background-color: #333;
+      }   
+    }
+  }
+  .navbar-nav .open .dropdown-menu > li > a {
+    color: #333;
+  }
+  .main-header-brand {
+    font-size: 20.4px;
+    color: white;
+    padding: 10px 15px;
+    height: initial;
+    &:hover, &:focus {
+      color: white;
+    }
+  }
+  .main-navbar-menu-right {
+    li {
+      border-right: 1px solid white;
+      &.navbar-btn-user {
+        & > a {
+          color: white;      
+          background-color: #93cbf9;
+          padding: 10px 15px;
+          &:hover, &:focus {
+            background-color: #579ec8;
+            color: white;
+          }
+        }
+      }
+      &.navbar-btn-tasks {
+        & > a {
+          padding: 10px 8px;
+          background-color: #555;
+          &:hover, &:focus {
+            background-color: #4b4b4b;
+          }
+          .badge {
+            background-color: rgb(160, 160, 160);
+            vertical-align: top;
+            margin-left: 5px;
+            color: white;
+            padding: 3px 5px;
+          }
+        }
+      }
+      &.navbar-btn-messages {
+        & > a {
+          padding: 10px 8px;
+          background-color: #892e65;
+          &:hover, &:focus {
+            background-color: #762c59;;
+          }
+          .badge {
+            background-color: rgb(209, 91, 71);
+            vertical-align: top;
+            margin-left: 5px;
+            color: white;
+            padding: 3px 5px;
+          }
+        }
+      }
+      ul.dropdown-menu {
+        color: #333;
+      }
+    }  
+  }
+  .glyphicon {
+    color: white;
   }
 }
 
