@@ -57,18 +57,18 @@
 <table>
 <tbody>
 <tr>
-  <td style="width: 20%; border-right: 1px; border-color: grey; vertical-align: top">
-    <nav class="collapse navbar-collapse" id="js-navbar-collapse">
+  <td style="width: 230px; border-right: 1px; border-color: grey; vertical-align: top">
+    <nav>
       <ul class="nav nav-pills-nav nav-stacked">
-        <li class="active"><a href="#/"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Home</a></li>
-        <li><a ng-href="#/about"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> About</a></li>
-        <li><a ng-href="#/tasks"><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Tasks</a></li>
+        <li class="active"><a href="#/"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Home</h4></a></li>
+        <li><a ng-href="#/about"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> About</h4></a></li>
+        <li><a ng-href="#/tasks"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Tasks</h4></a></li>
       </ul>
     </nav>
   </td>
-  <td style="width: 100%; height: 100%">
+  <td>
     <div style="width: 100%; height: 100%; max-width: inherit" class="container">
-      <div ng-view=""></div>
+      <div ng-view="" style="width: 100%; height: 100%; max-width: inherit; min-width: 1411px"></div>
     </div>
   </td>
 </tr>

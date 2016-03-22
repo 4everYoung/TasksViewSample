@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     task_types = TaskGroup.group(
       :provider, 
       :task_type
-    ).map{|t| { provider: t.provider, task_type: t.task_type}}.unshift({provider: '', task_type: ''})
+    ).map{|t| { provider: t.provider, task_type: t.task_type}}
     render json: task_types
   end
 
