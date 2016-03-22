@@ -3,6 +3,12 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url('../fonts/OpenSans-Regular.ttf')  format('truetype');
+  font-weight: 400;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -14,7 +20,6 @@ body {
   padding: 0;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,
 .footer {
@@ -22,12 +27,10 @@ body {
   padding-right: 15px;
 }
 
-/* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
   margin-bottom: 10px;
 
-  /* Make the masthead heading the same height as the navigation */
   h3 {
     margin-top: 0;
     margin-bottom: 0;
@@ -36,7 +39,6 @@ body {
   }
 }
 
-/* Custom page footer */
 .footer {
   padding-top: 19px;
   color: #777;
@@ -47,7 +49,6 @@ body {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
@@ -58,7 +59,6 @@ body {
   }
 }
 
-/* Supporting marketing content */
 .marketing {
   margin: 40px 0;
 
@@ -67,30 +67,123 @@ body {
   }
 }
 
-/* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
     max-width: 730px;
   }
 
-  /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
     padding-left: 0;
     padding-right: 0;
   }
-  /* Space out the masthead */
   .header {
     margin-bottom: 30px;
   }
-  /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
 }
+
 .vertical {
   vertical-align: top;
   padding-bottom: 5px;
   height: 34px;
 }
+
+/********* Custom css *********/
+body {
+  font-family: 'Open Sans';
+  .header {
+    padding-left: 20px;
+    background-color: #2b81af;
+    color: white;
+    text-align: right;
+  }
+
+  header {
+    font-size: 20.4px;
+    text-align: left;
+  }
+
+  #primary-grid {
+    .ui-grid-canvas {
+      padding-top: 0;
+    }
+    .ui-grid-header {
+      color: #707070;
+      font-weight: normal;
+      background: #F2F2F2;
+      background-image: -webkit-linear-gradient(top, #f8f8f8 0%, #ececec 100%);
+      background-repeat: repeat-x;
+
+      .ui-grid-header-cell {
+        border-right: 2px solid;
+        border-color: #ddd;
+        &:hover {
+          color: rgb(84, 126, 168);
+        }
+        .ui-grid-cell-contents {
+          height: 42px;
+          padding: 10px 18px;
+          &:focus {
+            background-image: -webkit-linear-gradient(top, #eff3f8 0%, #e3e7ed 100%);
+            color: rgb(84, 126, 168);
+          }
+        }
+      }
+    }
+    .ui-grid-viewport {
+      cursor: pointer;
+      .ui-grid-row {
+        height: 38px;
+        color: #3c85ce; 
+
+        &:first-child .ui-grid-cell {
+          border-top: 0;
+        }
+        &:nth-child(odd) {
+          .ui-grid-cell {
+            background: #f9f9f9;
+          }
+          .ui-grid-cell:first-child {
+            background-color: #f1f1f1;
+            text-align: center;
+          }
+        }
+        &:nth-child(even) {
+          .ui-grid-cell {
+            background: #fff;
+          }
+          .ui-grid-cell:first-child {
+            background-color: #f9f9f9;
+            text-align: center;
+          }
+        }
+        &:hover .ui-grid-cell {
+          &:first-child {
+            background-color: #eaeaea;            
+          }
+          background: #f9f9f9;
+        }
+
+        .ui-grid-cell {
+          border-right: 2px solid;
+          border-top: 2px solid;
+          border-color: #ddd;
+          height: 38px;
+          .ui-grid-cell-contents {
+            padding: 8px 10px;
+          }
+        }
+      }
+    }
+    .ui-grid-pager-panel {
+      padding: 5px 0;
+      border-top: 2px solid;
+      border-color: #ddd;
+    }
+  }
+}
+/*****************************/

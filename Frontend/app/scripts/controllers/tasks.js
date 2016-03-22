@@ -38,8 +38,11 @@ angular.module('taskViewSampleApp')
       columnDefs: $scope.columnDef,
       enableColumnMenus: false,
       rawData: false,
+      enablePaging: true,
       paginationPageSizes: [25, 50, 75],
-      paginationPageSize: 20
+      paginationPageSize: 25,
+      enableHorizontalScrollbar: 0,
+      enableVerticalScrollbar: 0
     };
   };
 
