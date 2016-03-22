@@ -38,8 +38,12 @@ angular.module('taskViewSampleApp')
       columnDefs: $scope.columnDef,
       enableColumnMenus: false,
       rawData: false,
+      enableSorting: true,
+      enablePaging: true,
       paginationPageSizes: [25, 50, 75],
-      paginationPageSize: 20
+      paginationPageSize: 25,
+      enableHorizontalScrollbar: 0,
+      enableVerticalScrollbar: 0
     };
   };
 
@@ -65,13 +69,21 @@ angular.module('taskViewSampleApp')
   };
   $scope.columnDef = [
     {
+      field: 'test',
+      displayName: '',
+      visible: true,
+      minWidth: 100,
+      maxWidth: 100
+    },
+    {
       field: 'task_group.operator.name',
       displayName: "Operator",
-      visible: true},
+      visible: true,
+    },
     {
       field: 'description',
       displayName: "Description",
-      visible: true
+      visible: true 
     },
     { field: 'task_group.priority',
       displayName: "Priority",
