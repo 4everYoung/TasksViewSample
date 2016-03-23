@@ -56,34 +56,4 @@ class TaskSerializer < ActiveModel::Serializer
       name:   assignee.full_name
     }
   end
-
-  # ==============================================================
-  # attributes :id, :description, :created_at, :updated_at
-  # has_one :assignee
-  # has_one :business 
-  # has_one :device
-  # has_one :task_group
-
-  # class AssigneeSerializer < ActiveModel::Serializer
-  #   attributes :id, :email, :first_name, :last_name
-  # end
-
-  # class BusinessSerializer < ActiveModel::Serializer
-  #   attributes :id, :name, :address, :city, :state, :zip, :country, :phone
-  # end
-
-  # class DeviceSerializer < ActiveModel::Serializer
-  #   attributes :id, :name, :browser, :os
-  # end
-
-  # class TaskGroupSerializer < ActiveModel::Serializer
-  #   attributes :id, :name, :provider, :task_type, :priority
-  
-  #   has_one :assignor
-
-  #   class AssignorSerializer < ActiveModel::Serializer
-  #     attributes :id, :email, :first_name, :last_name
-  #   end  
-  # end
-  # ==============================================================
 end

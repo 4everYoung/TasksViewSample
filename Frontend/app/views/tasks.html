@@ -18,13 +18,13 @@
 </div>
 
 <div class="form-inline pull-right">
-  <select class="btn btn-primary dropdown-toggle vertical" ng-model="filters.task_type_provider" ng-change="id=filters.task_type_provider" style="background-color: #2b81af; padding-right: 5px;padding-left: 5px;">Task Type Provider
-    <option value="">Choose task type & provider</option>
+  <select class="btn btn-primary dropdown-toggle vertical" ng-model="task_type_provider" ng-change="id=task_type_provider" style="background-color: #2b81af; padding-right: 5px;padding-left: 5px;">Task Type Provider
+    <option value="%">Choose task type & provider</option>
     <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
   </select>
   <input  type="text" name="input" style="vertical-align: top; width:190px; display: inline-block" id="focusedInput" class="form-control form-inline vertical" placeholder=" search by group name" ng-model="filters.query" >
   <md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style="" class="vertical"></md-datepicker>
-  <button ng-click='fetchTasks()' style="background-color: #2b81af" class="btn btn-small btn-primary vertical">Search</button> |
+  <button ng-click='fetchTasks(true)' style="background-color: #2b81af" class="btn btn-small btn-primary vertical">Search</button> |
   <button ng-click='clearFilters()' style="background-color: #2b81af" class="btn btn-small btn-primary vertical">Clear All</button>
 </div>
 </div>

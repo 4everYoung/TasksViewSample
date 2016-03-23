@@ -17,7 +17,17 @@ module TasksFilterable
         tasks = tasks.where(:task_groups => {:provider => filters['provider'] })    if filters['provider'].present?
         tasks = tasks.where("task_groups.name LIKE ?", "%#{filters['query']}%")     if filters['query'].present?
       end
+
+      limit       = filters['limit'].to_i
+      total_items = tasks.count
+
+      tasks = tasks.offset(limit*(filters['offset'].to_i - 1)).limit(limit)
     end
-    tasks
+    { 
+      tasks: ActiveModel::SerializableResource.new(tasks), 
+      meta: { 
+        total_items: total_items 
+      } 
+    }
   end
 end

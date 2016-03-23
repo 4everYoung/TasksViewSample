@@ -38,9 +38,8 @@ app.config(function ($routeProvider, $httpProvider) {
 });
 
 app.factory('Task', ['$resource', function($resource) {
-  return $resource('/api/tasks/:id.json', null, {
-    'update': { method:'PUT' }
-  });
+  return $resource('/api/tasks/:id.json', null, { query: { method: 'get', isArray: false } }
+);
 }]);
 
 app.factory('TaskGroup', ['$resource', function($resource) {
