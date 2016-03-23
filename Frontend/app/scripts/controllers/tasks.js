@@ -2,8 +2,9 @@
 
 angular.module('taskViewSampleApp')
 .controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, breadcrumbs, $routeParams, $http, $interval, Task, TaskGroup) {
-  $scope.breadcrumbs = breadcrumbs;
-  $scope.breadcrumbs.generateBreadcrumbs();
+  $scope.breadcrumbs = breadcrumbs
+  $scope.breadcrumbs.generateBreadcrumbs()
+
   $scope.csvExport = function() {
     $http({
       method: 'post',
@@ -24,99 +25,162 @@ angular.module('taskViewSampleApp')
             console.log('Some problem occured in process of export')
             $interval.cancel(checkPerform)
           }
-        });
-      }, 5000);
+        })
+      }, 5000)
     });
   };
 
-  $scope.fetchTasks = function() {
-    $scope.tasksData = Task.query({ filters: $scope.filters });
-    $scope.gridOptions = {
-      data: 'tasksData',
-      enableRowHeaderSelection: false,
-      multiSelect: false,
-      enableFiltering: false,
-      columnDefs: $scope.columnDef,
-      enableColumnMenus: false,
-      rawData: false,
-      enableSorting: true,
-      enablePaging: true,
-      paginationPageSizes: [25, 50, 75],
-      paginationPageSize: 25,
-      enableHorizontalScrollbar: 0,
-      enableVerticalScrollbar: 0
-    };
-  };
+  $scope.fetchTasks = function(isUpdateFilters) {
+    if (isUpdateFilters) {
+      $scope.filtersForSearch = $.extend(true, {}, $scope.filters)
+      $scope.fetchPaginationFilters(1)
+    }
 
-  $scope.clearFilters = function() {
+    $scope.filtersForSearch.offset  = $scope.filters.offset
+    $scope.filtersForSearch.limit   = $scope.filters.limit
+
+    Task.query({ filters: $scope.filtersForSearch }).$promise.then(function(response){
+      $scope.tasksData              = response.tasks
+      $scope.gridOptions.totalItems = response.meta.total_items
+      $scope.gridGoToPage($scope.filters.offset)
+    })
+  }
+
+  $scope.fetchTaskGroups = function() {
+    TaskGroup.query().$promise.then(function(response){
+      $scope.initializeTaskTypeProvider()
+      $scope.task_types = response
+    })
+  }
+
+  $scope.initializeCreatedAt = function() {
     $scope.created_at = new Date
-    $scope.filters = {
-      query:      '',
-      task_type:  '',
-      provider:   '',
-      created_at: ''
-    };
-    $scope.fetchTasks();
-  };
+  }
+
+  $scope.initializeTaskTypeProvider = function() {
+    $scope.task_type_provider = $scope.joinTypeProvider({provider: '', task_type: ''}) 
+  }
 
   $scope.joinTypeProvider = function(data) {
     return [data.provider, data.task_type].join('%')
   };
 
   $scope.setFiltersByTypeProvider = function(data) {
-    var tmp = data.split('%');
-    $scope.filters.provider   = tmp[0];
+    var tmp = data.split('%')
+    $scope.filters.provider   = tmp[0]
     $scope.filters.task_type  = tmp[1]
-  };
-  $scope.columnDef = [
-    {
-      field: 'test',
-      displayName: '',
-      visible: true,
-      minWidth: 100,
-      maxWidth: 100
-    },
-    {
-      field: 'task_group.operator.name',
-      displayName: "Operator",
-      visible: true,
-    },
-    {
-      field: 'description',
-      displayName: "Description",
-      visible: true 
-    },
-    { field: 'task_group.priority',
-      displayName: "Priority",
-      visible: true
-    },
-    {
-      field: 'task_group.name',
-      displayName: "Group Name",
-      visible: true
+  }
+
+  $scope.initializeFilters = function() {
+    $scope.createEmptyFiltersObj()
+    $scope.filtersForSearch = $.extend(true, {}, $scope.filters)
+  }
+
+  $scope.createEmptyFiltersObj = function() {
+     $scope.filters = {
+      query:      '',
+      task_type:  '',
+      provider:   '',
+      created_at: ''
     }
-  ];
+    $scope.fetchPaginationFilters(1)
+  }
 
-  $scope.filters = {
-    query:      '',
-    task_type:  '',
-    provider:   '',
-    created_at: ''
-  };
+  $scope.fetchPaginationFilters = function(offset, limit) {
+    $scope.filters.offset = offset  || $scope.gridOptions.paginationCurrentPage
+    $scope.filters.limit  = limit   || $scope.gridOptions.paginationPageSize   
+  }
 
-  $scope.$watch('task_type_provider', function(value){
-    if (value) { $scope.setFiltersByTypeProvider(value) }
-  });
+  $scope.clearFilters = function() {
+    $scope.createEmptyFiltersObj()
+    $scope.initializeCreatedAt()
+    $scope.initializeTaskTypeProvider()
+    $scope.fetchTasks(true)
+  }
 
-  $scope.$watch('created_at', function(value){
-    $scope.filters.created_at = (value) ? moment($scope.created_at).format('DD.MM.YYYY') : ''
-  });
+  $scope.initializeGrid = function() {
+    $scope.columnDef = [
+      {
+        field: 'test',
+        displayName: '',
+        visible: true,
+        minWidth: 100,
+        maxWidth: 100
+      },
+      {
+        field:        'task_group.operator.name',
+        displayName:  'Operator',
+        visible:      true
+      },
+      {
+        field:        'description',
+        displayName:  'Description',
+        visible:      true 
+      },
+      { field:        'task_group.priority',
+        displayName:  'Priority',
+        visible:      true
+      },
+      {
+        field:        'task_group.name',
+        displayName:  'Group Name',
+        visible:      true
+      }
+    ]
 
-  TaskGroup.query().$promise.then(function(response){
-    $scope.task_type_provider = $scope.joinTypeProvider(response[0]);
-    $scope.task_types = response
-  });
+    $scope.gridOptions = {
+      data:                       'tasksData',
+      enableRowHeaderSelection:   false,
+      multiSelect:                false,
+      enableFiltering:            false,
+      columnDefs:                 $scope.columnDef,
+      enableColumnMenus:          false,
+      rawData:                    false,
+      enableSorting:              true,
+      enableHorizontalScrollbar:  0,
+      enableVerticalScrollbar:    0,
+      enablePaging:               true,
+      paginationPageSizes:        [25, 50, 75],
+      paginationPageSize:         25,
+      paginationCurrentPage:      1,
+      useExternalPagination:      true,
+      onRegisterApi: function(gridApi) {
+        $scope.gridApi = gridApi
 
-  $scope.fetchTasks();
-  $scope.created_at = new Date
+        gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {  
+          if ($scope.filters.limit == pageSize) {
+            $scope.gridGoToPage(newPage)
+          }
+          else {
+            $scope.gridGoToPage()
+          }
+
+          $scope.fetchPaginationFilters()     
+          $scope.fetchTasks(false)
+        })
+      }
+    }
+  }
+
+  $scope.gridGoToPage = function(value) {
+    $scope.gridOptions.paginationCurrentPage = value || 1
+  }
+
+  $scope.initializeWatchers = function() {
+    $scope.$watch('task_type_provider', function(value){
+      if (value) { $scope.setFiltersByTypeProvider(value) }
+    })
+
+    $scope.$watch('created_at', function(value){
+      $scope.filters.created_at = (value) ? moment($scope.created_at).format('DD.MM.YYYY') : ''
+    })
+  }
+
+  $scope.initializeCreatedAt() 
+  $scope.initializeGrid()
+  $scope.initializeFilters()
+  $scope.initializeWatchers()
+
+  $scope.fetchTaskGroups()
+  $scope.fetchTasks(true)
 }]);
