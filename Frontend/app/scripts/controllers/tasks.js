@@ -58,7 +58,7 @@ angular.module('taskViewSampleApp')
   }
 
   $scope.initializeTaskTypeProvider = function() {
-    $scope.task_type_provider = $scope.joinTypeProvider({provider: '', task_type: ''}) 
+    $scope.task_type_provider = $scope.joinTypeProvider({provider: '', task_type: ''})
   }
 
   $scope.joinTypeProvider = function(data) {
@@ -88,7 +88,7 @@ angular.module('taskViewSampleApp')
 
   $scope.fetchPaginationFilters = function(offset, limit) {
     $scope.filters.offset = offset  || $scope.gridOptions.paginationCurrentPage
-    $scope.filters.limit  = limit   || $scope.gridOptions.paginationPageSize   
+    $scope.filters.limit  = limit   || $scope.gridOptions.paginationPageSize
   }
 
   $scope.clearFilters = function() {
@@ -101,11 +101,12 @@ angular.module('taskViewSampleApp')
   $scope.initializeGrid = function() {
     $scope.columnDef = [
       {
-        field: 'test',
-        displayName: '',
-        visible: true,
-        minWidth: 100,
-        maxWidth: 100
+        field:        'active',
+        displayName:  '',
+        type:         'boolean',
+        cellTemplate: '<input type="checkbox" style="width: 40px">',
+        visible:      true,
+        maxWidth: 50
       },
       {
         field:        'task_group.operator.name',
@@ -115,7 +116,7 @@ angular.module('taskViewSampleApp')
       {
         field:        'description',
         displayName:  'Description',
-        visible:      true 
+        visible:      true
       },
       { field:        'task_group.priority',
         displayName:  'Priority',
@@ -147,7 +148,7 @@ angular.module('taskViewSampleApp')
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi
 
-        gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {  
+        gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
           if ($scope.filters.limit == pageSize) {
             $scope.gridGoToPage(newPage)
           }
@@ -155,7 +156,7 @@ angular.module('taskViewSampleApp')
             $scope.gridGoToPage()
           }
 
-          $scope.fetchPaginationFilters()     
+          $scope.fetchPaginationFilters()
           $scope.fetchTasks(false)
         })
       }
@@ -176,7 +177,7 @@ angular.module('taskViewSampleApp')
     })
   }
 
-  $scope.initializeCreatedAt() 
+  $scope.initializeCreatedAt()
   $scope.initializeGrid()
   $scope.initializeFilters()
   $scope.initializeWatchers()
