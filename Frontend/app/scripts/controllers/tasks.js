@@ -104,9 +104,10 @@ angular.module('taskViewSampleApp')
         field:        'active',
         displayName:  '',
         type:         'boolean',
-        cellTemplate: '<input type="checkbox" style="width: 40px">',
+        headerCellTemplate: '<input type="checkbox" style="margin-left: 14px; margin-top: 16px">',
+        cellTemplate: '<input type="checkbox" style="margin-left: 14px;">',
         visible:      true,
-        maxWidth: 50
+        maxWidth: 40
       },
       {
         field:        'task_group.operator.name',
