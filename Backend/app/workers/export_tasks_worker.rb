@@ -2,7 +2,7 @@ class ExportTasksWorker
   include Sidekiq::Worker
 
   def perform options
-    tasks = TasksFilterable.compose_tasks_collection(options)
+    tasks = TasksFilterable.compose_tasks_collection(options)[:tasks]
     reports_directory = "#{Rails.root}/#{CONFIG['reports_directory']}"
     Dir.mkdir(reports_directory) unless File.directory?(CONFIG['reports_directory'])
     CSV.open( "#{reports_directory}/report_#{Time.now.strftime("%d-%m-%Y_%H-%M-%S")}.csv", 'w' ) do |writer|

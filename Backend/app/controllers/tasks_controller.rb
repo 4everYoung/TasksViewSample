@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   require 'csv'
 
   def index
-    render json: TasksFilterable.compose_tasks_collection(params['filters']), root: false
+    result = TasksFilterable.compose_tasks_collection(params['filters'])
+    render json: { tasks: ActiveModel::SerializableResource.new(result[:tasks]), meta: { total_items: result[:total_items]  }}
   end
 
   def task_types
@@ -14,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def export
-    render :status => :accepted, :json => { jid: ExportTasksWorker.perform_async(params['filters']) }
+    render :status => :accepted, :json => { jid: ExportTasksWorker.perform_async(params['filters'].except('limit', 'offset')) }
   end
 
   def check_perform

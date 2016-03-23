@@ -19,15 +19,13 @@ module TasksFilterable
       end
 
       limit       = filters['limit'].to_i
+      offset      = filters['offset'].to_i
       total_items = tasks.count
-
-      tasks = tasks.offset(limit*(filters['offset'].to_i - 1)).limit(limit)
+      tasks       = tasks.offset(limit*(offset - 1)).limit(limit) if (limit > 0 && offset > 0)
     end
     { 
-      tasks: ActiveModel::SerializableResource.new(tasks), 
-      meta: { 
-        total_items: total_items 
-      } 
+      tasks: tasks, 
+      total_items: total_items
     }
   end
 end
