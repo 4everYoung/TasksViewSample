@@ -9,7 +9,9 @@ var app = angular.module('taskViewSampleApp', [
   'ngTouch',
   'ui.grid.pagination',
   'ngMaterial',
-  'ng-breadcrumbs'
+  'ng-breadcrumbs',
+  'ui.grid',
+  'ui.grid.selection',
 ]);
 
 app.config(function ($routeProvider, $httpProvider) {

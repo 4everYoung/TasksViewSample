@@ -1,7 +1,6 @@
 'use strict';
 
-angular.module('taskViewSampleApp')
-.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, breadcrumbs, $routeParams, $http, $interval, Task, TaskGroup) {
+app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, breadcrumbs, $routeParams, $http, $interval, Task, TaskGroup) {
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
 
@@ -101,29 +100,25 @@ angular.module('taskViewSampleApp')
   $scope.initializeGrid = function() {
     $scope.columnDef = [
       {
-        field:        'active',
-        displayName:  '',
-        type:         'boolean',
-        headerCellTemplate: '<input type="checkbox" style="margin-left: 14px; margin-top: 16px">',
-        cellTemplate: '<input type="checkbox" style="margin-left: 14px;">',
-        visible:      true,
-        maxWidth: 40
-      },
-      {
+        name:         'operator_name',
         field:        'task_group.operator.name',
         displayName:  'Operator',
         visible:      true
       },
       {
+        name:         'description',
         field:        'description',
         displayName:  'Description',
         visible:      true
       },
-      { field:        'task_group.priority',
+      { 
+        name:         'task_group_name_priority',
+        field:        'task_group.priority',
         displayName:  'Priority',
         visible:      true
       },
       {
+        name:         'task_group_name',
         field:        'task_group.name',
         displayName:  'Group Name',
         visible:      true
@@ -132,15 +127,16 @@ angular.module('taskViewSampleApp')
 
     $scope.gridOptions = {
       data:                       'tasksData',
-      enableRowHeaderSelection:   false,
-      multiSelect:                false,
+      enableRowSelection:         true,
+      enableSelectAll:            true,
+      selectionRowHeaderWidth:    35,
+      multiSelect:                true,
       enableFiltering:            false,
       columnDefs:                 $scope.columnDef,
       enableColumnMenus:          false,
       rawData:                    false,
       enableSorting:              true,
       enableHorizontalScrollbar:  0,
-      enableVerticalScrollbar:    0,
       enablePaging:               true,
       paginationPageSizes:        [25, 50, 75],
       paginationPageSize:         25,
