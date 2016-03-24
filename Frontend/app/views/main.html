@@ -1,17 +1,14 @@
-<ul class="breadcrumb" style="background-color: white; padding: 0px">
+<ul class="breadcrumb">
   <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
     <a ng-if="!$last" ng-href="#{{ breadcrumb.path }}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
     <span ng-if="$last" ng-bind="breadcrumb.label"></span>
   </li>
 </ul>
-<hr>
-<div style="min-width: inherit">
 <div class="container">
   <div class="jumbotron">
     <h1>Attention!</h1>
     <p>This application shows how to use Rails as backend framwork, AngularJS as frontend framework. Parts should be started each from it is own terminal. Bootstrap used for styling it!</p>
     <a type="button" class="btn btn-success" ng-href="#/tasks">Tasks</a>
     <a type="button" class="btn btn-info" ng-href="#/about">About</a>
-    </div>
-</div>
+  </div>
 </div>

@@ -49,27 +49,43 @@
     </div>
   </div>
 </nav>
-<table>
-<tbody>
-<tr>
-  <td style="width: 230px; border-right: 1px; border-color: grey; vertical-align: top">
-    <nav>
-      <ul class="nav nav-pills-nav nav-stacked">
-        <li class="active"><a href="#/"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Home</h4></a></li>
-        <li><a ng-href="#/about"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> About</h4></a></li>
-        <li><a ng-href="#/tasks"><h4><span class="glyphicon glyphicon-user" style="color: #3c763d" aria-hidden="true"></span> Tasks</h4></a></li>
-      </ul>
-    </nav>
-  </td>
-  <td>
-    <div style="width: 100%; height: 100%; max-width: inherit" class="container">
-      <div ng-view="" style="width: 100%; height: 100%; max-width: inherit; min-width: 1411px"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <nav class='pages-navigation-bar'>
+        <ul class="nav nav-pills nav-stacked pages-navigation-menu">
+          <li>
+            <a href="javascript:void(0)" data-target="#pnm-pages" data-toggle="collapse">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              <strong>Pages</strong>
+              <span class="caret arrow"></span>
+            </a>
+            <ul class="nav nav-stacked collapse pages-navigation-submenu collapse in" id="pnm-pages">
+              <li class="active">
+                <a href="#/">
+                  <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Home
+                </a>
+              </li>
+              <li>
+                <a ng-href="#/about">
+                  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> About
+                </a>
+              </li>
+              <li>
+                <a ng-href="#/tasks">
+                  <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Tasks
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
     </div>
-  </td>
-</tr>
-
-</tbody>
-</table>
+    <div class="col-md-10">
+      <main class="main-view" ng-view="" style="width: 100%; height: 100%; max-width: inherit; min-width: 1411px"></main>
+    </div>
+  </div>
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
