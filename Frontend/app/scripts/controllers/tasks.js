@@ -111,7 +111,7 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
         displayName:  'Description',
         visible:      true
       },
-      { 
+      {
         name:         'task_group_name_priority',
         field:        'task_group.priority',
         displayName:  'Priority',
@@ -155,7 +155,25 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
 
           $scope.fetchPaginationFilters()
           $scope.fetchTasks(false)
-        })
+        });
+        gridApi.selection.on.rowSelectionChanged($scope, function() {
+          var checkedCount = $scope.gridApi.selection.getSelectedCount(),
+            buttons = $(".btn-group").find(".btn.btn-small.btn-primary").not('.btn.btn-small.btn-primary.export');
+          if(checkedCount <= 0) {
+            buttons.attr("disabled", true);
+          } else {
+            buttons.attr("disabled", false);
+          }
+        });
+        gridApi.selection.on.rowSelectionChangedBatch($scope, function() {
+          var checkedCount = $scope.gridApi.selection.getSelectedCount(),
+            buttons = $(".btn-group").find(".btn.btn-small.btn-primary").not('.btn.btn-small.btn-primary.export');
+          if(checkedCount <= 0) {
+            buttons.attr("disabled", true);
+          } else {
+            buttons.attr("disabled", false);
+          }
+        });
       }
     }
   }
