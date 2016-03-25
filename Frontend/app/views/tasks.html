@@ -7,11 +7,11 @@
 <h2>Tasks</h2>
 <div class='row'>
   <div class="col-md-5 grid-controls">
-    <button ng-click='' class="btn btn-small btn-primary " disabled="true">Add Task</button>
-    <button ng-click='' class="btn btn-small btn-primary" disabled="true">Assign Task</button>
-    <button ng-click='' class="btn btn-small btn-warning" disabled="true">Confirm Task</button>
-    <button ng-click='' class="btn btn-small btn-warning" disabled="true">Unassign Task</button>
-    <button ng-click='' class="btn btn-small btn-danger" disabled="true">Delete Task</button>
+    <button ng-click='' class="btn btn-small btn-success " disabled="true">Add Task</button>
+    <button ng-click='' class="btn btn-small btn-success" disabled="true">Assign Task</button>
+    <button ng-click='' class="btn btn-small btn-success" disabled="true">Confirm Task</button>
+    <button ng-click='' class="btn btn-small btn-success" disabled="true">Unassign Task</button>
+    <button ng-click='' class="btn btn-small btn-success" disabled="true">Delete Task</button>
   </div>
   <div class="col-md-7 grid-controls">
     <select id="task-provider-select" class="form-control" ng-model="task_type_provider" ng-change="id=task_type_provider">Task Type Provider
@@ -21,8 +21,8 @@
     <input id="task-provider-select" type="text" id="group-name-search" class="form-control" placeholder="Search by group name" ng-model="filters.query" >
     <div class='pull-right-btn-collection'>
       <md-datepicker id="datepicker-created-at" ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at"></md-datepicker>
-      <button ng-click='fetchTasks(true)' class="btn btn-small btn-primary">Search</button>
-      <button ng-click='clearFilters()'   class="btn btn-small btn-danger">Clear All</button>
+      <button ng-click='fetchTasks(true)' class="btn btn-small btn-success">Search</button>
+      <button ng-click='clearFilters()'   class="btn btn-small btn-success">Clear All</button>
       <button ng-click='csvExport()'      class="btn btn-small btn-success">Export to CSV</button>
     </div>
   </div>
