@@ -1,7 +1,7 @@
 module TasksFilterable
   extend ActiveSupport::Concern
 
-  def self.compose_tasks_collection filters
+  def self.compose_tasks_collection filters, getLastRecording = nil
     tasks = Task.includes(:device, :business, :task_group, :assignee)
     if filters.present?
       filters = JSON.parse(filters) unless filters.is_a?(Hash)
@@ -22,6 +22,7 @@ module TasksFilterable
       offset      = filters['offset'].to_i
       total_items = tasks.count
       tasks       = tasks.offset(limit*(offset - 1)).limit(limit) if (limit > 0 && offset > 0)
+      tasks       = tasks.last(getLastRecording) if getLastRecording.present?
     end
     { 
       tasks: tasks, 
