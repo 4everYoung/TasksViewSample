@@ -5,26 +5,27 @@
   </li>
 </ul>
 <h2>Tasks</h2>
-<div class="btn-group pull-left">
-<button ng-click='' style="background-color: #2b81af" class="btn btn-small btn-primary " disabled="true">Add Task</button>
-<button ng-click='' style="background-color: #2b81af" class="btn btn-small btn-primary" disabled="true">Assign Task</button>
-<button ng-click='' style="background-color: #2b81af" class="btn btn-small btn-primary" disabled="true">Delete Task</button>
-<button ng-click='' style="background-color: #2b81af" class="btn btn-small btn-primary" disabled="true">Confirm Task</button>
-<button ng-click='' style="background-color: #2b81af" class="btn btn-small btn-primary" disabled="true">Unassign Task</button>
-<button ng-click='csvExport()' style="background-color: #2b81af" class="btn btn-small btn-primary export">Export to CSV</button>
+<div class='row'>
+  <div class="col-md-5 grid-controls">
+    <button ng-click='' class="btn btn-small btn-primary " disabled="true">Add Task</button>
+    <button ng-click='' class="btn btn-small btn-primary" disabled="true">Assign Task</button>
+    <button ng-click='' class="btn btn-small btn-warning" disabled="true">Confirm Task</button>
+    <button ng-click='' class="btn btn-small btn-warning" disabled="true">Unassign Task</button>
+    <button ng-click='' class="btn btn-small btn-danger" disabled="true">Delete Task</button>
+  </div>
+  <div class="col-md-7 grid-controls">
+    <select id="task-provider-select" class="form-control" ng-model="task_type_provider" ng-change="id=task_type_provider">Task Type Provider
+      <option value="%">Choose task type & provider</option>
+      <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
+    </select>
+    <input id="task-provider-select" type="text" id="group-name-search" class="form-control" placeholder="Search by group name" ng-model="filters.query" >
+    <div class='pull-right-btn-collection'>
+      <md-datepicker id="datepicker-created-at" ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at"></md-datepicker>
+      <button ng-click='fetchTasks(true)' class="btn btn-small btn-primary">Search</button>
+      <button ng-click='clearFilters()'   class="btn btn-small btn-danger">Clear All</button>
+      <button ng-click='csvExport()'      class="btn btn-small btn-success">Export to CSV</button>
+    </div>
+  </div>
 </div>
-
-<div class="form-inline pull-right">
-  <select class="btn btn-primary dropdown-toggle vertical" ng-model="task_type_provider" ng-change="id=task_type_provider" style="background-color: #2b81af; padding-right: 5px;padding-left: 5px;">Task Type Provider
-    <option value="%">Choose task type & provider</option>
-    <option ng-repeat="option in task_types" value="{{option.provider}}%{{option.task_type}}">{{option.provider}} {{option.task_type}}</option>
-  </select>
-  <input  type="text" name="input" style="vertical-align: top; width:190px; display: inline-block" id="focusedInput" class="form-control form-inline vertical" placeholder=" search by group name" ng-model="filters.query" >
-  <md-datepicker ng-model="created_at" md-placeholder="MM/dd/YYYY" ng-change="id=created_at" style="" class="vertical"></md-datepicker>
-  <button ng-click='fetchTasks(true)' style="background-color: #2b81af" class="btn btn-small btn-primary vertical">Search</button> |
-  <button ng-click='clearFilters()' style="background-color: #2b81af" class="btn btn-small btn-primary vertical">Clear All</button>
-</div>
-</div>
-<br>
-<div id="primary-grid" style="margin-top:25px; border: 1px solid rgb(212,212,212); min-height: 600px" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination class="grid"></div>
+<div id="primary-grid" ui-grid="gridOptions" ui-grid-selection ui-grid-pagination class="grid"></div>
 </div>

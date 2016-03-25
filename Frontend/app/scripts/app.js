@@ -11,7 +11,7 @@ var app = angular.module('taskViewSampleApp', [
   'ngMaterial',
   'ng-breadcrumbs',
   'ui.grid',
-  'ui.grid.selection',
+  'ui.grid.selection'
 ]);
 
 app.config(function ($routeProvider, $httpProvider) {
