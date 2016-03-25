@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     resources :tasks, only: [:index, :show] do
       collection do
         get   'task_types'
+        get   'check_perform/:jid' => 'tasks#check_perform' 
         post  'export'
-        get   'check_perform/:jid' => 'tasks#check_perform'
+        post  'remove_collection'
       end
     end
   end

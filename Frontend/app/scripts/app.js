@@ -11,7 +11,8 @@ var app = angular.module('taskViewSampleApp', [
   'ngMaterial',
   'ng-breadcrumbs',
   'ui.grid',
-  'ui.grid.selection'
+  'ui.grid.selection',
+  'angularModalService'
 ]);
 
 app.config(function ($routeProvider, $httpProvider) {
@@ -40,7 +41,16 @@ app.config(function ($routeProvider, $httpProvider) {
 });
 
 app.factory('Task', ['$resource', function($resource) {
-  return $resource('/api/tasks/:id.json', null, { query: { method: 'get', isArray: false } }
+  return $resource('/api/tasks/:id.json', null, { 
+    query: { 
+      method: 'get', 
+      isArray: false 
+    },  
+    remove: {
+      method: 'post', 
+      url:    '/api/tasks/remove_collection.json'    
+    }
+  }
 );
 }]);
 

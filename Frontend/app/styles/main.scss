@@ -146,7 +146,7 @@ body {
   }
 
   #primary-grid {
-    margin-top:25px; 
+    margin-top: 10px; 
     border: 1px solid rgb(212,212,212);
     min-height: 600px;
 
@@ -290,6 +290,14 @@ body {
 
     .jumbotron-main {
       margin: 20px 50px 20px 20px;
+    }
+  }
+
+  .modal-dialog {
+    width: 1200px;
+
+    #modal-grid {
+      height: 500px;
     }
   }
 }

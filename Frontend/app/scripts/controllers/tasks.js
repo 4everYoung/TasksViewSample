@@ -1,6 +1,10 @@
 'use strict';
 
-app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'Task', 'TaskGroup', function ($scope, breadcrumbs, $routeParams, $http, $interval, Task, TaskGroup) {
+app.controller(
+  'TasksCtrl', 
+  ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'ModalService', 'Task', 'TaskGroup', 
+  function ($scope, breadcrumbs, $routeParams, $http, $interval, ModalService, Task, TaskGroup) {
+    
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
 
@@ -39,7 +43,7 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
     $scope.filtersForSearch.limit   = $scope.filters.limit
 
     Task.query({ filters: $scope.filtersForSearch }).$promise.then(function(response){
-      $scope.tasksData              = response.tasks
+      $scope.gridOptions.data       = response.tasks
       $scope.gridOptions.totalItems = response.meta.total_items
       $scope.gridGoToPage($scope.filters.offset)
     })
@@ -49,6 +53,24 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
     TaskGroup.query().$promise.then(function(response){
       $scope.initializeTaskTypeProvider()
       $scope.task_types = response
+    })
+  }
+
+  $scope.deleteTask = function($event) {
+    var rows = $scope.gridApi.selection.getSelectedRows()
+    var ids = rows.map(function(obj){return obj.id})
+
+    Task.remove({ids: ids, filters: $scope.filters }).$promise.then(function(response){
+      if (confirm('Are you sure?')) {
+        console.log(response.count+" records have been removed")
+        angular.forEach(rows, function (row, i) {
+          var index = $scope.gridOptions.data.lastIndexOf(row);
+          $scope.gridOptions.data.splice(index, 1);
+        });
+        angular.forEach(response.tasks, function (task, i) {
+          $scope.gridOptions.data.push(task)
+        });         
+      }
     })
   }
 
@@ -126,25 +148,23 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
     ]
 
     $scope.gridOptions = {
-      data:                       'tasksData',
+      columnDefs:                 $scope.columnDef,
       enableRowSelection:         true,
       enableSelectAll:            true,
       selectionRowHeaderWidth:    35,
       multiSelect:                true,
       enableFiltering:            false,
-      columnDefs:                 $scope.columnDef,
       enableColumnMenus:          false,
       rawData:                    false,
       enableSorting:              true,
       enableHorizontalScrollbar:  0,
       enablePaging:               true,
-      paginationPageSizes:        [25, 50, 75],
+      paginationPageSizes:        [25, 50, 75, 100],
       paginationPageSize:         25,
       paginationCurrentPage:      1,
       useExternalPagination:      true,
       onRegisterApi: function(gridApi) {
         $scope.gridApi = gridApi
-
         gridApi.pagination.on.paginationChanged($scope, function (newPage, pageSize) {
           if ($scope.filters.limit == pageSize) {
             $scope.gridGoToPage(newPage)
@@ -157,22 +177,10 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
           $scope.fetchTasks(false)
         });
         gridApi.selection.on.rowSelectionChanged($scope, function() {
-          var checkedCount = $scope.gridApi.selection.getSelectedCount(),
-            buttons = $(".btn-group").find(".btn.btn-small.btn-primary").not('.btn.btn-small.btn-primary.export');
-          if(checkedCount <= 0) {
-            buttons.attr("disabled", true);
-          } else {
-            buttons.attr("disabled", false);
-          }
+          $(".grid-actions-btns .btn").attr("disabled", !($scope.gridApi.selection.getSelectedCount() > 0));
         });
         gridApi.selection.on.rowSelectionChangedBatch($scope, function() {
-          var checkedCount = $scope.gridApi.selection.getSelectedCount(),
-            buttons = $(".btn-group").find(".btn.btn-small.btn-primary").not('.btn.btn-small.btn-primary.export');
-          if(checkedCount <= 0) {
-            buttons.attr("disabled", true);
-          } else {
-            buttons.attr("disabled", false);
-          }
+          $(".grid-actions-btns .btn").attr("disabled", !($scope.gridApi.selection.getSelectedCount() > 0));
         });
       }
     }
@@ -192,7 +200,16 @@ app.controller('TasksCtrl', ['$scope', 'breadcrumbs', '$routeParams', '$http', '
     })
   }
 
-  $scope.initializeCreatedAt()
+  $scope.showModal = function() {
+    ModalService.showModal({
+      templateUrl:  "./views/modal.html",
+      controller:   "SampleModalController"
+    }).then(function(modal) {
+      modal.element.modal();
+    });
+  }
+
+  // $scope.initializeCreatedAt()
   $scope.initializeGrid()
   $scope.initializeFilters()
   $scope.initializeWatchers()

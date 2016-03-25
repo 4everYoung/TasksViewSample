@@ -6,6 +6,18 @@ class TasksController < ApplicationController
     render json: { tasks: ActiveModel::SerializableResource.new(result[:tasks]), meta: { total_items: result[:total_items]  }}
   end
 
+  def remove_collection
+    count = 0
+    params[:ids].each do | id |
+      count+=1 if Task.where(id: id).first.try(:destroy)
+    end
+    result = TasksFilterable.compose_tasks_collection(params['filters'], count)
+    render json: { 
+      tasks:  ActiveModel::SerializableResource.new(result[:tasks]),
+      count:  count
+    } 
+  end
+
   def task_types
     task_types = TaskGroup.group(
       :provider, 

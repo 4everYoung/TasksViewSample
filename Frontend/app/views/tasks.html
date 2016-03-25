@@ -6,12 +6,12 @@
 </ul>
 <h2>Tasks</h2>
 <div class='row'>
-  <div class="col-md-5 grid-controls">
-    <button ng-click='' class="btn btn-small btn-success " disabled="true">Add Task</button>
-    <button ng-click='' class="btn btn-small btn-success" disabled="true">Assign Task</button>
-    <button ng-click='' class="btn btn-small btn-success" disabled="true">Confirm Task</button>
-    <button ng-click='' class="btn btn-small btn-success" disabled="true">Unassign Task</button>
-    <button ng-click='' class="btn btn-small btn-success" disabled="true">Delete Task</button>
+  <div class="col-md-5 grid-controls grid-actions-btns">
+    <button ng-click='showModal()' class="btn btn-small btn-success " disabled="true">Add Task</button>
+    <button ng-click='showModal()' class="btn btn-small btn-success" disabled="true">Assign Task</button>
+    <button ng-click='showModal()' class="btn btn-small btn-success" disabled="true">Confirm Task</button>
+    <button ng-click='showModal()' class="btn btn-small btn-success" disabled="true">Unassign Task</button>
+    <button ng-click='deleteTask()' class="btn btn-small btn-success" disabled="true">Delete Task</button>
   </div>
   <div class="col-md-7 grid-controls">
     <select id="task-provider-select" class="form-control" ng-model="task_type_provider" ng-change="id=task_type_provider">Task Type Provider
