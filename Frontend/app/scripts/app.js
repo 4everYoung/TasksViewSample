@@ -35,20 +35,30 @@ app.config(function ($routeProvider, $httpProvider) {
       controllerAs: 'tasks',
       label: 'Tasks'
     })
+    .when('/tasks/create', {
+      templateUrl:  'views/createTask.html',
+      controller:   'TasksCtrl',
+      controllerAs: 'tasks',
+      label: 'Create Task'
+    })
     .otherwise({
       redirectTo: '/'
     });
 });
 
 app.factory('Task', ['$resource', function($resource) {
-  return $resource('/api/tasks/:id.json', null, { 
-    query: { 
-      method: 'get', 
-      isArray: false 
-    },  
+  return $resource('/api/tasks/:id.json', null, {
+    query: {
+      method: 'get',
+      isArray: false
+    },
+    create: {
+      method: 'post',
+      url: '/api/tasks/create.json'
+    },
     remove: {
-      method: 'post', 
-      url:    '/api/tasks/remove_collection.json'    
+      method: 'post',
+      url:    '/api/tasks/remove_collection.json'
     }
   }
 );
@@ -57,3 +67,8 @@ app.factory('Task', ['$resource', function($resource) {
 app.factory('TaskGroup', ['$resource', function($resource) {
   return $resource('/api/tasks/task_types.json', null, {});
 }]);
+
+app.factory('User', ['$resource', function($resource) {
+  return $resource('/api/tasks/users.json', null, {});
+}]);
+

@@ -1,10 +1,10 @@
 'use strict';
 
 app.controller(
-  'TasksCtrl', 
-  ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'ModalService', 'Task', 'TaskGroup', 
-  function ($scope, breadcrumbs, $routeParams, $http, $interval, ModalService, Task, TaskGroup) {
-    
+  'TasksCtrl',
+  ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'ModalService', 'User', 'Task', 'TaskGroup', '$location',
+  function ($scope, breadcrumbs, $routeParams, $http, $interval, ModalService, User, Task, TaskGroup, $location) {
+
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
 
@@ -56,6 +56,22 @@ app.controller(
     })
   }
 
+    $scope.fetchUsers = function() {
+      User.query().$promise.then(function(response){
+        $scope.users = response
+      })
+    }
+
+  $scope.cancel = function() {
+    $location.path(window.history.back());
+  };
+
+  $scope.add_task = function() {
+    Task.create({attributes: $("#create-form").serializeArray()}).$promise.then(function(response){
+      $location.path(window.history.back());
+    })
+  };
+
   $scope.deleteTask = function($event) {
     var rows = $scope.gridApi.selection.getSelectedRows()
     var ids = rows.map(function(obj){return obj.id})
@@ -69,7 +85,7 @@ app.controller(
         });
         angular.forEach(response.tasks, function (task, i) {
           $scope.gridOptions.data.push(task)
-        });         
+        });
       }
     })
   }
@@ -216,4 +232,5 @@ app.controller(
 
   $scope.fetchTaskGroups()
   $scope.fetchTasks(true)
+  $scope.fetchUsers()
 }]);

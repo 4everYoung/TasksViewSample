@@ -22,8 +22,13 @@ class TasksController < ApplicationController
     task_types = TaskGroup.group(
       :provider, 
       :task_type
-    ).map{|t| { provider: t.provider, task_type: t.task_type}}
+    ).map{|t| { provider: t.provider, task_type: t.task_type, id: t.id}}
     render json: task_types
+  end
+
+  def users
+    users = User.all.map{|t| { full_name: t.full_name, email: t.email, id: t.id}}
+    render json: users
   end
 
   def export
@@ -40,5 +45,16 @@ class TasksController < ApplicationController
       'QUEUED'
     end
     render json: { result: status }
+  end
+
+  def add_task
+    task = Task.create({
+                    description: 		params["attributes"].select{|key| key["name"] == 'description'}.first['value'],
+                    device_id:      Device.first.id,
+                    business_id: 		Business.first.id,
+                    task_group_id:  params["attributes"].select{|key| key["name"] == 'task_group_id'}.first['value'],
+                    assignee_id: 		params["attributes"].select{|key| key["name"] == 'assignee_id'}.first['value']
+                })
+    render json: { result: "OK" }
   end
 end
