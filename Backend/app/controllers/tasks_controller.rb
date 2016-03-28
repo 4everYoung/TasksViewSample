@@ -31,6 +31,19 @@ class TasksController < ApplicationController
     render json: users
   end
 
+  def assign
+    assignee = User.where(id: params[:assignee_id]).first
+    tasks = Task.where(id: params[:ids])
+    tasks.map {|t| t.update_attributes(assignee_id: assignee.id) }
+    render json: { count: tasks.count, assignee: assignee.as_json } 
+  end
+
+  def unassign
+    tasks = Task.where(id: params[:ids])
+    tasks.map {|t| t.update_attributes(assignee_id: nil) }
+    render json: { count: tasks.count } 
+  end
+
   def export
     render :status => :accepted, :json => { jid: ExportTasksWorker.perform_async(params['filters'].except('limit', 'offset')) }
   end

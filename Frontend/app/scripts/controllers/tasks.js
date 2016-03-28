@@ -73,11 +73,11 @@ app.controller(
   };
 
   $scope.deleteTask = function($event) {
-    var rows = $scope.gridApi.selection.getSelectedRows()
-    var ids = rows.map(function(obj){return obj.id})
+    if (confirm('Are you sure?')) {
+      var rows  = $scope.gridApi.selection.getSelectedRows()
+      var ids   = rows.map(function(obj){return obj.id})
 
-    Task.remove({ids: ids, filters: $scope.filters }).$promise.then(function(response){
-      if (confirm('Are you sure?')) {
+      Task.remove({ids: ids, filters: $scope.filters }).$promise.then(function(response){
         console.log(response.count+" records have been removed")
         angular.forEach(rows, function (row, i) {
           var index = $scope.gridOptions.data.lastIndexOf(row);
@@ -88,6 +88,43 @@ app.controller(
         });
       }
     })
+  }
+
+  $scope.unassignTask = function($event) {
+    var rows  = $scope.gridApi.selection.getSelectedRows()
+    var ids   = rows.map(function(obj){return obj.id})
+ 
+    Task.unassign({ids: ids }).$promise.then(function(response){
+      console.log(response.count+" records have been unassigned")
+      angular.forEach(rows, function (row, i) {
+        var index = $scope.gridOptions.data.lastIndexOf(row);
+        $scope.gridOptions.data[index].assignee = null  
+      }); 
+      $scope.gridApi.selection.clearSelectedRows();      
+    })  
+  }
+
+  $scope.assignTasks = function() {
+    var modalInstance = ModalService.showModal({
+      templateUrl:  "./views/modal/assign.html",
+      controller:   "AssignModalController",
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        if (result.uid) {
+          var rows  = $scope.gridApi.selection.getSelectedRows()
+          var ids   = rows.map(function(obj){return obj.id})
+
+          Task.assign({ids: ids, assignee_id: result.uid}).$promise.then(function(response){
+            angular.forEach(rows, function (row, i) {
+              var index = $scope.gridOptions.data.lastIndexOf(row);
+              $scope.gridOptions.data[index].assignee.name = response.assignee.full_name; 
+            }); 
+            $scope.gridApi.selection.clearSelectedRows();      
+          })     
+        }
+      });
+    });
   }
 
   $scope.initializeCreatedAt = function() {
@@ -159,6 +196,12 @@ app.controller(
         name:         'task_group_name',
         field:        'task_group.name',
         displayName:  'Group Name',
+        visible:      true
+      },
+      {
+        name:         'assignee',
+        field:        'assignee.name',
+        displayName:  'Assignee',
         visible:      true
       }
     ]

@@ -57,8 +57,16 @@ app.factory('Task', ['$resource', function($resource) {
       url: '/api/tasks/create.json'
     },
     remove: {
-      method: 'post',
-      url:    '/api/tasks/remove_collection.json'
+      method: 'post', 
+      url:    '/api/tasks/remove_collection.json'    
+    },
+    unassign: {
+      method: 'post', 
+      url:    '/api/tasks/unassign.json'    
+    },  
+    assign: {
+      method: 'post', 
+      url:    '/api/tasks/assign.json'    
     }
   }
 );
@@ -69,6 +77,10 @@ app.factory('TaskGroup', ['$resource', function($resource) {
 }]);
 
 app.factory('User', ['$resource', function($resource) {
-  return $resource('/api/tasks/users.json', null, {});
+  return $resource('/api/users/:id.json', null, {
+    query: { 
+      method: 'get', 
+      isArray: false 
+    },    
+  });
 }]);
-

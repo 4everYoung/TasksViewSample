@@ -10,8 +10,12 @@ Rails.application.routes.draw do
         post  'create' => 'tasks#add_task'
         post  'export'
         post  'remove_collection'
+        post  'unassign'   
+        post  'assign'  
       end
     end
+
+    resources :users, only: [:index] 
   end
   
   root to: "home#index"
