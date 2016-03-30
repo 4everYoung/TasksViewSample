@@ -40,7 +40,7 @@ def create_devices
 				Device.create({
 						name: 		Faker::Company.name,   	
 						browser: 	Faker::Address.street_address, 
-						os: 		Faker::Address.city, 
+						os: 			Faker::Address.city, 
 					})		
 			end
 		end
@@ -63,7 +63,7 @@ def create_task_groups
 			provider: 		provider,
 			task_type: 		type, 
 			priority:   	priority.rand(0..3),
-			assignor_id:  	users.sample.id,
+			assignor_id:  users.sample.id,
 			operator_id: 	users.sample.id
 		})	
 	end
