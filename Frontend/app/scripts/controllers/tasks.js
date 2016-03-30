@@ -2,8 +2,8 @@
 
 app.controller(
   'TasksCtrl',
-  ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'ModalService', 'User', 'Task', 'TaskGroup', '$location',
-  function ($scope, breadcrumbs, $routeParams, $http, $interval, ModalService, User, Task, TaskGroup, $location) {
+  ['$scope', 'breadcrumbs', '$routeParams', '$http', '$interval', 'ModalService', 'Task', 'TaskGroup',
+  function ($scope, breadcrumbs, $routeParams, $http, $interval, ModalService, Task, TaskGroup) {
 
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
@@ -56,16 +56,6 @@ app.controller(
     })
   }
 
-    $scope.fetchUsers = function() {
-      User.query().$promise.then(function(response){
-        $scope.users = response
-      })
-    }
-
-  $scope.cancel = function() {
-    $location.path(window.history.back());
-  };
-
   $scope.add_task = function() {
     Task.create({attributes: $("#create-form").serializeArray()}).$promise.then(function(response){
       $location.path(window.history.back());
@@ -86,8 +76,8 @@ app.controller(
         angular.forEach(response.tasks, function (task, i) {
           $scope.gridOptions.data.push(task)
         });
-      }
-    })
+      })
+    }
   }
 
   $scope.unassignTask = function($event) {
@@ -275,5 +265,4 @@ app.controller(
 
   $scope.fetchTaskGroups()
   $scope.fetchTasks(true)
-  $scope.fetchUsers()
 }]);

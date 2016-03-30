@@ -18,28 +18,24 @@ var app = angular.module('taskViewSampleApp', [
 app.config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when('/', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl',
-      controllerAs: 'main',
-      label: 'Home page'
+      templateUrl:  'views/main.html',
+      controller:   'MainCtrl',
+      label:        'Home page'
     })
     .when('/about', {
-      templateUrl: 'views/about.html',
-      controller: 'AboutCtrl',
-      controllerAs: 'about',
-      label: 'About'
+      templateUrl:  'views/about.html',
+      controller:   'AboutCtrl',
+      label:        'About'
     })
     .when('/tasks', {
       templateUrl:  'views/tasks.html',
       controller:   'TasksCtrl',
-      controllerAs: 'tasks',
-      label: 'Tasks'
+      label:        'Tasks'
     })
     .when('/tasks/create', {
       templateUrl:  'views/createTask.html',
-      controller:   'TasksCtrl',
-      controllerAs: 'tasks',
-      label: 'Create Task'
+      controller:   'CreateTasksCtrl',
+      label:        'Create Task'
     })
     .otherwise({
       redirectTo: '/'
