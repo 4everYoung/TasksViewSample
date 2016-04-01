@@ -1,17 +1,13 @@
 class UsersController < ApplicationController
 
   def index
-    users = User.all
-    total_items = users.count
+    users       = User.all
+    total_items = users.size
 
     if (filters = params['filters']).present?
-      filters = JSON.parse(filters) unless filters.is_a?(Hash)
-      limit   = filters['limit'].to_i
-      offset  = filters['offset'].to_i
-      users   = users.offset(limit*(offset - 1)).limit(limit) if (limit > 0 && offset > 0)
+      filters = hash_string_symbols(JSON.parse(filters)) unless filters.is_a?(Hash)
+      users   = users.offset(filters[:limit]*(filters[:offset] - 1)).limit(filters[:limit]) if (filters[:limit] > 0 && filters[:offset] > 0)
     end
-
-    users = users.map { |t| { full_name: t.full_name, email: t.email, id: t.id } }
-    render json: { users: users, total_items: total_items }
+    render json: { users: ActiveModel::SerializableResource.new(users), total_items: total_items }
   end
 end

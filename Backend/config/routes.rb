@@ -14,7 +14,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :users, only: [:index] 
+    resources :users, only: [:index]
+    resources :businesses, only: [:index] do
+      collection do
+        get 'search_by_name/:name' => 'businesses#search_by_name'
+      end   
+    end
   end
   
   root to: "home#index"

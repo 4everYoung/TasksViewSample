@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   require 'csv'
 
   def index
-    result = TasksFilterable.compose_tasks_collection(params['filters'])
+    result = TasksFilterable.compose_tasks_collection(convert_filters(params['filters']))
     render json: { tasks: ActiveModel::SerializableResource.new(result[:tasks]), meta: { total_items: result[:total_items]  }}
   end
 
@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     params[:ids].each do | id |
       count+=1 if Task.where(id: id).first.try(:destroy)
     end
-    result = TasksFilterable.compose_tasks_collection(params['filters'], count)
+    result = TasksFilterable.compose_tasks_collection(convert_filters(params['filters']), count)
     render json: { 
       tasks:  ActiveModel::SerializableResource.new(result[:tasks]),
       count:  count
@@ -56,13 +56,14 @@ class TasksController < ApplicationController
   end
 
   def add_task
-    task = Task.create({
-      description: 		params["attributes"].select{|key| key["name"] == 'description'}.first['value'],
-      device_id:      Device.first.id,
-      business_id: 		Business.first.id,
-      task_group_id:  params["attributes"].select{|key| key["name"] == 'task_group_id'}.first['value'],
-      assignee_id: 		params["attributes"].select{|key| key["name"] == 'assignee_id'}.first['value']
-    })
-    render json: { result: "OK" }
+    task = Task.new(params.require(:task).permit(:description, :task_group_id, :assignee_id, :business_id))
+    render json: { result: task.save ? "OK" : "FAILED" }
+  end
+
+  private
+
+  def convert_filters filters
+    filters   = JSON.parse(filters) unless filters.is_a?(Hash)
+    @filters  = filters.present? ? hash_string_symbols(filters) : {}
   end
 end

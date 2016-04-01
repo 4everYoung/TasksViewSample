@@ -2,7 +2,9 @@ def create_users
 	User.destroy_all
 	User.create({
 		email: 'test@example.com', 
-		password: '123456789'
+		password: '123456789',
+		first_name: 'Test',
+		last_name: 	'Test'
 	})
 
 	1.upto(50) do |i|

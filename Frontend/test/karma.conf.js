@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/angular-translate/angular-translate.js',
       'bower_components/ng-breadcrumbs-translate/dist/ng-breadcrumbs.min.js',
       'bower_components/angular-modal-service/dst/angular-modal-service.js',
+      'bower_components/angucomplete-alt/angucomplete-alt.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
