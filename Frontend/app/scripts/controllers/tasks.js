@@ -100,8 +100,11 @@ app.controller(
           var ids   = rows.map(function(obj){return obj.id})
 
           Task.assign({ids: ids, assignee_id: result.uid}).$promise.then(function(response){
+            console.log(response.count+" records have been assigned")
             angular.forEach(rows, function (row, i) {
               var index = $scope.gridOptions.data.lastIndexOf(row);
+              var cellData = $scope.gridOptions.data[index]
+              if (!cellData.assignee) { cellData.assignee = {} }         
               $scope.gridOptions.data[index].assignee.name = response.assignee.full_name; 
             }); 
             $scope.gridApi.selection.clearSelectedRows();      
