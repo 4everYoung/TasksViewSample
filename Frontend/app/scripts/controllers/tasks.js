@@ -218,9 +218,10 @@ app.controller(
           else {
             $scope.gridGoToPage()
           }
-
+          
           $scope.fetchPaginationFilters()
           $scope.fetchTasks(false)
+          $('.ui-grid-canvas').height(600)
         });
         gridApi.selection.on.rowSelectionChanged($scope, function() {
           $(".grid-actions-btns .btn").attr("disabled", !($scope.gridApi.selection.getSelectedCount() > 0));
