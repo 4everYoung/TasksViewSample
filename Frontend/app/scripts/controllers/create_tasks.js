@@ -2,8 +2,8 @@
 
 app.controller(
   'CreateTasksCtrl',
-  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', '$location',
-  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, $location) {
+  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', 'Business', '$location',
+  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, Business, $location) {
 
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
@@ -24,8 +24,11 @@ app.controller(
     $location.path(window.history.back());
   };
 
-  $scope.add_task = function() {
-    Task.create({attributes: $("#create-form").serializeArray()}).$promise.then(function(response){
+  $scope.addTask = function() {
+    if ($scope.selectedBusinesses) {
+      $scope.form.business_id = $scope.selectedBusinesses.originalObject.id
+    }
+    Task.create({task: $scope.form}).$promise.then(function(response){
       $location.path(window.history.back());
     })
   };

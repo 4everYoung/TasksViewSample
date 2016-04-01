@@ -56,12 +56,6 @@ app.controller(
     })
   }
 
-  $scope.add_task = function() {
-    Task.create({attributes: $("#create-form").serializeArray()}).$promise.then(function(response){
-      $location.path(window.history.back());
-    })
-  };
-
   $scope.deleteTask = function($event) {
     if (confirm('Are you sure?')) {
       var rows  = $scope.gridApi.selection.getSelectedRows()

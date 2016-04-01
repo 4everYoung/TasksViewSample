@@ -34,6 +34,14 @@ body {
     }
   }
 
+  .angucomplete-selected-row {
+    color: #000 !important;
+  }
+
+  .angucomplete-row .highlight {
+    color: #ff0000 !important;
+  }
+
   .main-header {
     margin-bottom: 0;
     background-color: #438eb9;
@@ -299,6 +307,11 @@ body {
     #modal-grid {
       height: 500px;
     }
+  }
+
+  #business_id_dropdown {
+    height: 300px;
+    overflow: auto;
   }
 }
 /*****************************/

@@ -5,24 +5,40 @@
   </li>
 </ul>
 <h2>Task create</h2>
-<form id="create-form">
-  <label>Task Name</label>
-  <input name="description" type="text" id="group-name-search" class="form-control" ng-model="filters.query" >
-  <label>Assign to Business</label>
-  <select name="business_id" class="form-control" ng-model="task_business" disabled="true">Choose business
-  </select>
-  <label>Task group Name</label>
-  <select name="task_group_id" class="form-control" ng-model="task_type_provider" ng-change="id=task_type_provider">Choose task group
+<form>
+
+  <label for="description">Task Name</label>
+  <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" >
+
+  <label for="business_id">Assign to Business</label>
+  <div angucomplete-alt 
+    id='business_id' 
+    placeholder='Search business by name' 
+    pause='500' 
+    selected-object='selectedBusinesses' 
+    remote-url='api/businesses/search_by_name/'
+    remote-url-request-formatter='remoteUrlRequestFn'
+    remote-url-data-field='items'
+    title-field='name'
+    description-field='description'
+    minlength='4'
+    input-class='form-control form-control-small angucomplete-input'
+    match-class='highlight'>
+  </div>
+
+  <label for="task_group_id">Task group Name</label>
+  <select name="task_group_id" class="form-control" ng-model="form.task_group_id">Choose task group
     <option ng-repeat="option in task_types" value="{{option.id}}">{{option.provider}} {{option.task_type}}</option>
   </select>
-  <label>User</label>
-  <select name="assignee_id" class="form-control" ng-model="task_user">Choose assignee
+
+  <label for="assignee_id">User</label>
+  <select name="assignee_id" class="form-control" ng-model="form.assignee_id">Choose assignee
     <option ng-repeat="option in users" value="{{option.id}}">{{option.full_name}}</option>
   </select>
+
 </form>
 <br>
 <div class='pull-right-btn-collection'>
-  <button ng-click='add_task()' class="btn btn-small btn-success">Save</button>
+  <button ng-click='addTask()' class="btn btn-small btn-success">Save</button>
   <button ng-click='cancel()'   class="btn btn-small btn-success">Cancel</button>
 </div>
-

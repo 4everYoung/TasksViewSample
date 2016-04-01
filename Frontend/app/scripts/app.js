@@ -12,7 +12,8 @@ var app = angular.module('taskViewSampleApp', [
   'ng-breadcrumbs',
   'ui.grid',
   'ui.grid.selection',
-  'angularModalService'
+  'angularModalService',
+  'angucomplete-alt'
 ]);
 
 app.config(function ($routeProvider, $httpProvider) {
@@ -77,6 +78,19 @@ app.factory('User', ['$resource', function($resource) {
     query: { 
       method: 'get', 
       isArray: false 
-    },    
+    },  
+    search: {
+      method: 'post', 
+      url:    '/api/businesses/search_by_name/:name.json'       
+    }  
+  });
+}]);
+
+app.factory('Business', ['$resource', function($resource) {
+  return $resource('/api/businesses/:id.json', null, {
+    search: {
+      method: 'post', 
+      url:    '/api/businesses/search_by_name/:name.json'       
+    }  
   });
 }]);
