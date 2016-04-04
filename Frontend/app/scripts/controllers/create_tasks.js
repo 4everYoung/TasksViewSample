@@ -2,8 +2,8 @@
 
 app.controller(
   'CreateTasksCtrl',
-  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', 'Business', '$location',
-  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, Business, $location) {
+  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', 'Business', 'Device', '$location',
+  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, Business, Device, $location) {
 
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
@@ -17,6 +17,12 @@ app.controller(
   $scope.fetchUsers = function() {
     User.query().$promise.then(function(response){
       $scope.users = response.users
+    })
+  }
+
+  $scope.fetchDevices = function() {
+    Device.query().$promise.then(function(response){
+      $scope.devices = response.devices
     })
   }
 
@@ -35,4 +41,5 @@ app.controller(
 
   $scope.fetchTaskGroups()
   $scope.fetchUsers()
+  $scope.fetchDevices()
 }]);

@@ -36,6 +36,10 @@
     <option ng-repeat="option in users" value="{{option.id}}">{{option.full_name}}</option>
   </select>
 
+  <label for="device_id">Device</label>
+  <select name="device_id" class="form-control" ng-model="form.device_id">Choose device
+    <option ng-repeat="option in devices" value="{{option.id}}">{{option.name}}, {{option.browser}}, {{option.os}}</option>
+  </select>
 </form>
 <br>
 <div class='pull-right-btn-collection'>

@@ -56,7 +56,7 @@ class TasksController < ApplicationController
   end
 
   def add_task
-    task = Task.new(params.require(:task).permit(:description, :task_group_id, :assignee_id, :business_id))
+    task = Task.new(params.require(:task).permit(:description, :task_group_id, :assignee_id, :business_id, :device_id))
     render json: { result: task.save ? "OK" : "FAILED" }
   end
 

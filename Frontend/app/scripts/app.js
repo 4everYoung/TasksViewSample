@@ -94,3 +94,12 @@ app.factory('Business', ['$resource', function($resource) {
     }  
   });
 }]);
+
+app.factory('Device', ['$resource', function($resource) {
+  return $resource('/api/devices/:id.json', null, {
+    query: {
+      method: 'get', 
+      isArray: false      
+    }  
+  });
+}]);
