@@ -70,7 +70,16 @@ app.factory('Task', ['$resource', function($resource) {
 }]);
 
 app.factory('TaskGroup', ['$resource', function($resource) {
-  return $resource('/api/tasks/task_types.json', null, {});
+  return $resource('/api/task_groups/:id.json', null, {
+    query: { 
+      method: 'get', 
+      isArray: false 
+    },  
+    search: {
+      method: 'post', 
+      url:    '/api/task_groups/search_by_type/:type.json'       
+    }    
+  });
 }]);
 
 app.factory('User', ['$resource', function($resource) {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160317123845) do
+ActiveRecord::Schema.define(version: 20160406113458) do
 
   create_table "businesses", force: :cascade do |t|
     t.string "name",    limit: 255
@@ -32,12 +32,13 @@ ActiveRecord::Schema.define(version: 20160317123845) do
   end
 
   create_table "task_groups", force: :cascade do |t|
-    t.string  "name",        limit: 255
-    t.string  "provider",    limit: 255
-    t.string  "task_type",   limit: 255
-    t.integer "priority",    limit: 4
-    t.integer "assignor_id", limit: 4
-    t.integer "operator_id", limit: 4
+    t.string  "name",          limit: 255
+    t.string  "provider",      limit: 255
+    t.string  "task_type",     limit: 255
+    t.integer "priority",      limit: 4
+    t.integer "assignor_id",   limit: 4
+    t.integer "operator_id",   limit: 4
+    t.string  "provider_type", limit: 255
   end
 
   create_table "tasks", force: :cascade do |t|

@@ -18,14 +18,6 @@ class TasksController < ApplicationController
     } 
   end
 
-  def task_types
-    task_types = TaskGroup.group(
-      :provider, 
-      :task_type
-    ).map{|t| { provider: t.provider, task_type: t.task_type, id: t.id}}
-    render json: task_types
-  end
-
   def assign
     assignee = User.where(id: params[:assignee_id]).first
     tasks = Task.where(id: params[:ids])

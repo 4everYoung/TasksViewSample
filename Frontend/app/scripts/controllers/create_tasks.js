@@ -2,23 +2,11 @@
 
 app.controller(
   'CreateTasksCtrl',
-  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', 'Business', 'Device', '$location',
-  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, Business, Device, $location) {
+  ['$scope', 'breadcrumbs', '$routeParams', 'User', 'Task', 'TaskGroup', 'Business', 'Device','ModalService', '$location',
+  function ($scope, breadcrumbs, $routeParams, User, Task, TaskGroup, Business, Device, ModalService, $location) {
 
   $scope.breadcrumbs = breadcrumbs
   $scope.breadcrumbs.generateBreadcrumbs()
-
-  $scope.fetchTaskGroups = function() {
-    TaskGroup.query().$promise.then(function(response){
-      $scope.task_types = response
-    })
-  }
-
-  $scope.fetchUsers = function() {
-    User.query().$promise.then(function(response){
-      $scope.users = response.users
-    })
-  }
 
   $scope.fetchDevices = function() {
     Device.query().$promise.then(function(response){
@@ -30,16 +18,45 @@ app.controller(
     $location.path(window.history.back());
   };
 
-  $scope.addTask = function() {
-    if ($scope.selectedBusinesses) {
-      $scope.form.business_id = $scope.selectedBusinesses.originalObject.id
+  $scope.collectSelectedAttributes = function() {
+    if ($scope.selected.business) {
+      $scope.form.business_id = $scope.selected.business.originalObject.id
     }
+    if ($scope.selected.assignee) {
+      $scope.form.assignee_id = $scope.selected.assignee.originalObject.id    
+    }
+    if ($scope.selected.provider_type) {
+      $scope.form.task_group_id = $scope.selected.provider_type.originalObject.id    
+    } 
+  };
+
+  $scope.addTask = function() {
+    if ($scope.selected) { $scope.collectSelectedAttributes() } 
     Task.create({task: $scope.form}).$promise.then(function(response){
       $location.path(window.history.back());
     })
   };
 
-  $scope.fetchTaskGroups()
-  $scope.fetchUsers()
+  $scope.showModal = function(template, controller) {
+    ModalService.showModal({
+      templateUrl:  template,
+      controller:   controller,
+      inputs: {
+        provider_type: $scope.selected.provider_type.title
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+    });
+  }
+
+  $scope.initializeWatchers = function() {
+    $scope.$watch('selected.provider_type', function(value){
+      if (value) {
+        $scope.showModal("./views/modal.html", "TaskGroupModalController")
+      }
+    })
+  }
+
   $scope.fetchDevices()
+  $scope.initializeWatchers()
 }]);
