@@ -9,10 +9,9 @@ module TasksFilterable
         tasks = tasks.where(:created_at => (created_at.beginning_of_day..created_at.end_of_day)) 
       end
 
-      if filters[:task_type].present? || filters[:provider].present? || filters[:query].present? 
+      if filters[:provider_type].present? || filters[:query].present? 
         tasks = tasks.joins(:task_group)
-        tasks = tasks.where(:task_groups => {:task_type => filters[:task_type] })  if filters[:task_type].present?
-        tasks = tasks.where(:task_groups => {:provider => filters[:provider] })    if filters[:provider].present?
+        tasks = tasks.where(:task_groups => {:provider_type => filters[:provider_type] })  if filters[:provider_type].present?
         tasks = tasks.where("task_groups.name LIKE ?", "%#{filters[:query]}%")     if filters[:query].present?
       end
       

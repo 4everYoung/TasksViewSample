@@ -8,33 +8,52 @@
 <form>
 
   <label for="description">Task Name</label>
-  <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" >
+  <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" placeholder="Enter task name" >
 
   <label for="business_id">Assign to Business</label>
   <div angucomplete-alt 
     id='business_id' 
-    placeholder='Search business by name' 
+    placeholder='Search businesses by name' 
     pause='500' 
-    selected-object='selectedBusinesses' 
+    selected-object='selected.business' 
     remote-url='api/businesses/search_by_name/'
     remote-url-request-formatter='remoteUrlRequestFn'
     remote-url-data-field='items'
     title-field='name'
-    description-field='description'
     minlength='4'
     input-class='form-control form-control-small angucomplete-input'
     match-class='highlight'>
   </div>
 
   <label for="task_group_id">Task group Name</label>
-  <select name="task_group_id" class="form-control" ng-model="form.task_group_id">Choose task group
-    <option ng-repeat="option in task_types" value="{{option.id}}">{{option.provider}} {{option.task_type}}</option>
-  </select>
+  <div angucomplete-alt 
+    id='task_group_id' 
+    placeholder='Search task group by name' 
+    pause='500' 
+    selected-object='selected.provider_type' 
+    remote-url='api/task_groups/search_by_type/'
+    remote-url-request-formatter='remoteUrlRequestFn'
+    remote-url-data-field='items'
+    title-field='provider_type'
+    minlength='4'
+    input-class='form-control form-control-small angucomplete-input'
+    match-class='highlight'>
+  </div>
 
   <label for="assignee_id">User</label>
-  <select name="assignee_id" class="form-control" ng-model="form.assignee_id">Choose assignee
-    <option ng-repeat="option in users" value="{{option.id}}">{{option.full_name}}</option>
-  </select>
+  <div angucomplete-alt 
+    id='assignee_id' 
+    placeholder='Search users by name' 
+    pause='500' 
+    selected-object='selected.assignee' 
+    remote-url='api/users/search_by_name/'
+    remote-url-request-formatter='remoteUrlRequestFn'
+    remote-url-data-field='items'
+    title-field='full_name'
+    minlength='4'
+    input-class='form-control form-control-small angucomplete-input'
+    match-class='highlight'>
+  </div>
 
   <label for="device_id">Device</label>
   <select name="device_id" class="form-control" ng-model="form.device_id">Choose device

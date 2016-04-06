@@ -50,9 +50,8 @@ app.controller(
   }
 
   $scope.fetchTaskGroups = function() {
-    TaskGroup.query().$promise.then(function(response){
-      $scope.initializeTaskTypeProvider()
-      $scope.task_types = response
+    TaskGroup.query({ group_by: true }).$promise.then(function(response){
+      $scope.task_types = response.groups
     })
   }
 
@@ -118,20 +117,6 @@ app.controller(
     $scope.created_at = new Date
   }
 
-  $scope.initializeTaskTypeProvider = function() {
-    $scope.task_type_provider = $scope.joinTypeProvider({provider: '', task_type: ''})
-  }
-
-  $scope.joinTypeProvider = function(data) {
-    return [data.provider, data.task_type].join('%')
-  };
-
-  $scope.setFiltersByTypeProvider = function(data) {
-    var tmp = data.split('%')
-    $scope.filters.provider   = tmp[0]
-    $scope.filters.task_type  = tmp[1]
-  }
-
   $scope.initializeFilters = function() {
     $scope.createEmptyFiltersObj()
     $scope.filtersForSearch = $.extend(true, {}, $scope.filters)
@@ -140,9 +125,8 @@ app.controller(
   $scope.createEmptyFiltersObj = function() {
      $scope.filters = {
       query:      '',
-      task_type:  '',
-      provider:   '',
-      created_at: ''
+      created_at: '',
+      provider_type: ''
     }
     $scope.fetchPaginationFilters(1)
   }
@@ -155,7 +139,6 @@ app.controller(
   $scope.clearFilters = function() {
     $scope.createEmptyFiltersObj()
     $scope.initializeCreatedAt()
-    $scope.initializeTaskTypeProvider()
     $scope.fetchTasks(true)
   }
 
@@ -238,23 +221,19 @@ app.controller(
   }
 
   $scope.initializeWatchers = function() {
-    $scope.$watch('task_type_provider', function(value){
-      if (value) { $scope.setFiltersByTypeProvider(value) }
-    })
-
     $scope.$watch('created_at', function(value){
       $scope.filters.created_at = (value) ? moment($scope.created_at).format('DD.MM.YYYY') : ''
     })
   }
 
-  $scope.showModal = function() {
-    ModalService.showModal({
-      templateUrl:  "./views/modal.html",
-      controller:   "SampleModalController"
-    }).then(function(modal) {
-      modal.element.modal();
-    });
-  }
+  // $scope.showModal = function() {
+  //   ModalService.showModal({
+  //     templateUrl:  "./views/modal.html",
+  //     controller:   "SampleModalController"
+  //   }).then(function(modal) {
+  //     modal.element.modal();
+  //   });
+  // }
 
   // $scope.initializeCreatedAt()
   $scope.initializeGrid()
