@@ -5,11 +5,11 @@
   </li>
 </ul>
 <h2>Task create</h2>
-<form>
+<form name="form1" ng-submit="addTask()" novalidate>
   <div class='row form-group'>
     <div class='col-xs-6'>
       <label for="description">Task Name</label>
-      <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" placeholder="Enter task name" >
+      <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" placeholder="Enter task name" required>
     </div>
     <div class='col-xs-6'>
       <label for="business_id">Assign to Business</label>
@@ -24,7 +24,9 @@
         title-field='name'
         minlength='4'
         input-class='form-control form-control-small angucomplete-input'
-        match-class='highlight'>
+        match-class='highlight'
+        field-required='true'
+        field-required-class="business_id">
       </div>
     </div>
    </div>
@@ -42,12 +44,15 @@
         title-field='provider_type'
         minlength='4'
         input-class='form-control form-control-small angucomplete-input'
-        match-class='highlight'>
+        match-class='highlight'
+        field-required='true'
+        field-required-class='task_group_provider_name'
+        input-name='task_group_provider_name'>
       </div>
     </div>  
     <div class='col-xs-6'>
       <label for="task_group_name">Task Group</label>
-      <input ng-model="form.task_group_name" id="task_group_name" disabled="disabled" class='form-control form-control-small'>
+      <input ng-model="form.task_group_name" id="task_group_name" disabled="disabled" class='form-control form-control-small' required>
     </div>         
   </div>
 
@@ -65,19 +70,22 @@
         title-field='full_name'
         minlength='4'
         input-class='form-control form-control-small angucomplete-input'
-        match-class='highlight'>
+        match-class='highlight'
+        field-required='true'
+        field-required-class='assignee_id'
+        input-name='assignee_id'>
       </div>
     </div>
     <div class='col-xs-6'>
       <label for="device_id">Device</label>
-      <select name="device_id" class="form-control" ng-model="form.device_id">Choose device
+      <select name="device_id" class="form-control" ng-model="form.device_id" required>Choose device
         <option ng-repeat="option in devices" value="{{option.id}}">{{option.name}}, {{option.browser}}, {{option.os}}</option>
       </select>
     </div>  
   </div>
+  <br>
+  <div class='pull-right-btn-collection'>
+    <button type="submit"         class="btn btn-small btn-success" ng-disabled="form1.$invalid" >Save</button>
+    <button ng-click='cancel()'   class="btn btn-small btn-success">Cancel</button>
+  </div>
 </form>
-<br>
-<div class='pull-right-btn-collection'>
-  <button ng-click='addTask()' class="btn btn-small btn-success">Save</button>
-  <button ng-click='cancel()'   class="btn btn-small btn-success">Cancel</button>
-</div>
