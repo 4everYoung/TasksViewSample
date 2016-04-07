@@ -74,10 +74,10 @@ app.controller(
   }
 
   $scope.setTaskGroup = function() {
-    // var row = $scope.gridApi.selection.getSelectedRows()
-    // if (row.length) { 
-    //   close({ uid: row[0]['id'] }, 500);
-    // }
+    var row = $scope.gridApi.selection.getSelectedRows()
+    if (row.length) { 
+      close({ group: row[0] }, 500);
+    }
   }
 
   $scope.close = function() {
