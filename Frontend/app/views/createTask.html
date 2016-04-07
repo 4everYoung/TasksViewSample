@@ -6,59 +6,75 @@
 </ul>
 <h2>Task create</h2>
 <form>
-
-  <label for="description">Task Name</label>
-  <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" placeholder="Enter task name" >
-
-  <label for="business_id">Assign to Business</label>
-  <div angucomplete-alt 
-    id='business_id' 
-    placeholder='Search businesses by name' 
-    pause='500' 
-    selected-object='selected.business' 
-    remote-url='api/businesses/search_by_name/'
-    remote-url-request-formatter='remoteUrlRequestFn'
-    remote-url-data-field='items'
-    title-field='name'
-    minlength='4'
-    input-class='form-control form-control-small angucomplete-input'
-    match-class='highlight'>
+  <div class='row form-group'>
+    <div class='col-xs-6'>
+      <label for="description">Task Name</label>
+      <input name="description" type="text" id="group-name-search" class="form-control" ng-model="form.description" placeholder="Enter task name" >
+    </div>
+    <div class='col-xs-6'>
+      <label for="business_id">Assign to Business</label>
+      <div angucomplete-alt 
+        id='business_id' 
+        placeholder='Search businesses by name' 
+        pause='500' 
+        selected-object='selected.business' 
+        remote-url='api/businesses/search_by_name/'
+        remote-url-request-formatter='remoteUrlRequestFn'
+        remote-url-data-field='items'
+        title-field='name'
+        minlength='4'
+        input-class='form-control form-control-small angucomplete-input'
+        match-class='highlight'>
+      </div>
+    </div>
+   </div>
+  <div class='row form-group'>
+    <div class='col-xs-6'>
+      <label for="task_group_provider_name">Task group Name</label>
+      <div angucomplete-alt 
+        id='task_group_provider_name' 
+        placeholder='Search task group by name' 
+        pause='500' 
+        selected-object='selected.provider_type' 
+        remote-url='api/task_groups/search_by_type/'
+        remote-url-request-formatter='remoteUrlRequestFn'
+        remote-url-data-field='items'
+        title-field='provider_type'
+        minlength='4'
+        input-class='form-control form-control-small angucomplete-input'
+        match-class='highlight'>
+      </div>
+    </div>  
+    <div class='col-xs-6'>
+      <label for="task_group_name">Task Group</label>
+      <input ng-model="form.task_group_name" id="task_group_name" disabled="disabled" class='form-control form-control-small'>
+    </div>         
   </div>
 
-  <label for="task_group_id">Task group Name</label>
-  <div angucomplete-alt 
-    id='task_group_id' 
-    placeholder='Search task group by name' 
-    pause='500' 
-    selected-object='selected.provider_type' 
-    remote-url='api/task_groups/search_by_type/'
-    remote-url-request-formatter='remoteUrlRequestFn'
-    remote-url-data-field='items'
-    title-field='provider_type'
-    minlength='4'
-    input-class='form-control form-control-small angucomplete-input'
-    match-class='highlight'>
+  <div class='row form-group'>
+    <div class='col-xs-6'>
+      <label for="assignee_id">User</label>
+      <div angucomplete-alt 
+        id='assignee_id' 
+        placeholder='Search users by name' 
+        pause='500' 
+        selected-object='selected.assignee' 
+        remote-url='api/users/search_by_name/'
+        remote-url-request-formatter='remoteUrlRequestFn'
+        remote-url-data-field='items'
+        title-field='full_name'
+        minlength='4'
+        input-class='form-control form-control-small angucomplete-input'
+        match-class='highlight'>
+      </div>
+    </div>
+    <div class='col-xs-6'>
+      <label for="device_id">Device</label>
+      <select name="device_id" class="form-control" ng-model="form.device_id">Choose device
+        <option ng-repeat="option in devices" value="{{option.id}}">{{option.name}}, {{option.browser}}, {{option.os}}</option>
+      </select>
+    </div>  
   </div>
-
-  <label for="assignee_id">User</label>
-  <div angucomplete-alt 
-    id='assignee_id' 
-    placeholder='Search users by name' 
-    pause='500' 
-    selected-object='selected.assignee' 
-    remote-url='api/users/search_by_name/'
-    remote-url-request-formatter='remoteUrlRequestFn'
-    remote-url-data-field='items'
-    title-field='full_name'
-    minlength='4'
-    input-class='form-control form-control-small angucomplete-input'
-    match-class='highlight'>
-  </div>
-
-  <label for="device_id">Device</label>
-  <select name="device_id" class="form-control" ng-model="form.device_id">Choose device
-    <option ng-repeat="option in devices" value="{{option.id}}">{{option.name}}, {{option.browser}}, {{option.os}}</option>
-  </select>
 </form>
 <br>
 <div class='pull-right-btn-collection'>

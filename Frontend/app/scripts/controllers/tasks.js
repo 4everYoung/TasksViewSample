@@ -124,9 +124,9 @@ app.controller(
 
   $scope.createEmptyFiltersObj = function() {
      $scope.filters = {
-      query:      '',
-      created_at: '',
-      provider_type: ''
+      query:          '',
+      created_at:     '',
+      provider_type:  ''
     }
     $scope.fetchPaginationFilters(1)
   }
@@ -226,16 +226,6 @@ app.controller(
     })
   }
 
-  // $scope.showModal = function() {
-  //   ModalService.showModal({
-  //     templateUrl:  "./views/modal.html",
-  //     controller:   "SampleModalController"
-  //   }).then(function(modal) {
-  //     modal.element.modal();
-  //   });
-  // }
-
-  // $scope.initializeCreatedAt()
   $scope.initializeGrid()
   $scope.initializeFilters()
   $scope.initializeWatchers()
